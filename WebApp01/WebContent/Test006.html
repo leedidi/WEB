@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test006.html</title>
+</head>
+<body>
+
+<div>
+	<h1>수평선 넣기 / 공백 넣기</h1>
+	<hr>
+</div>
+
+<div>
+	수평선을 사용해보자
+	<!--@ 속성이름은 항상 공백 한칸 띄워야 함! 
+	    @ 속성 엘리먼트 사이는 붙여서 사용하기
+	    @ 이거로 직접 컬러 컨트롤하진 말기-->
+	<hr size="3" color="red">
+	<br><br>
+	
+	음영이 없는 수평선
+	<hr size="2" noshade="noshade">
+	<br><br>
+	
+	수평선의 수평 길이 설정
+	<hr size="5" width="400" align="right">
+	<hr size="5" width="200" align="right">
+	<br><br>
+	
+	수평선의 정렬
+	<!--@ %로, 브라우저 크기에 따라 어느정도로 보이게하게 설정가능 -->
+	<hr size="5" width="50%" align="left">
+	<hr size="7" width="50%" align="right">
+	<hr size="9" width="50%" align="center">
+	<hr size="9" width="50%">
+	<!--@ align 생략하면 기본적으로 센터 -->
+</div>
+
+<div>
+	공백 발생<br>
+	공백					공백<br>
+	공백 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 공백<br>
+	<!--@ HTML상 공백은 매우 작음 -->
+</div>
+<br><br>
+
+<!-- check~!!! -->
+<!-- 쓰지말아라~!!! -->
+<!--@ 걍 특징 기본적 파악 위해 사용해보는 것! -->
+<div>
+	<font size="1">F강의장 식구들 화이팅!</font><br>
+	<font size="2">F강의장 식구들 화이팅!</font><br>
+	<font size="3">F강의장 식구들 화이팅!</font><br>
+	<font size="4">F강의장 식구들 화이팅!</font><br>
+	<font size="5">F강의장 식구들 화이팅!</font><br>
+	<font size="6">F강의장 식구들 화이팅!</font><br>
+	<font size="7">F강의장 식구들 화이팅!</font><br>
+	<font size="8">F강의장 식구들 화이팅!</font><br> <!-- check -->
+	<font size="9">F강의장 식구들 화이팅!</font><br> <!-- check -->
+	<font size="10">F강의장 식구들 화이팅!</font><br><!-- check -->
+	
+	<font size="4" color="green">F강의장 식구들 화이팅!</font><br>
+	<font size="4" color="#00ff00">F강의장 식구들 화이팅!</font><br>
+	<!--@ 여기서 컬러 세부색 어케 보는지 확인하기 -> 는 따로 이런방법 없었음!
+	    @ RGB = Red, Green, blue 삼원색 합쳐서 코드값 생성! 
+	    @ 이름지정해서 보는 건 아마 16가지 정도 될듯.... -->
+	<font size="4" color="red" face="궁서체">F강의장 식구들 화이팅!</font><br>
+	
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test019.html</title>
+</head>
+<body>
+
+<div>
+	<h1>체크박스 만들기</h1>
+	<hr>
+</div>
+
+<div>
+	<form>
+		<p>오늘 저녁으로 먹고싶은 메뉴는?</p>
+		
+		<!--@ 글자 눌렀을때 체크표시에 체크 가능하게 하려면! 할수있는 방법 2가지 -->
+		<!--@ 1. -->
+		<label>
+			<input type="checkbox" name="foodCheck" value="1">밥
+		</label>
+		
+		<!--@ 2. 얘는 둘 사이가 떨어져 있어도 가능함! -->
+		<input type="checkbox" name="foodCheck" value="2" id="label2">
+
+		<label for="label2">미역국</label>
+		
+		<input type="checkbox" name="foodCheck" value="3">김치찌개
+		<input type="checkbox" name="foodCheck" value="4">계란말이
+		<input type="checkbox" name="foodCheck" value="5">장조림
+		<input type="checkbox" name="foodCheck" value="6">김
+		<input type="checkbox" name="foodCheck" value="7" checked="checked">멸치볶음
+		
+		<input type="checkbox" name="foodCheck" value="8" id="label8">
+		
+		<input type="text">
+		
+		<br><br><br><br>	
+		<label for="label8">김치</label>
+		
+		
+		<!--@ 1. 주의! 같은 네임속성(네임값) 가져야 함.. 그래야
+		 질문 하나에 대한 대답으로 처리 가능함!      -->
+		<!--@ 2. input엘리먼트와 밥, 미역국 등은 아무 연관성 X.. 데이터 바인딩 위해서는 value 속성 반드시 필요 -->
+		<!--@ 3. label 사용해서 글씨 클릭해서 체크박스 체크할수 있도록 사용 가능! -->
+	</form>
+</div>
+
+
+</body>
+</html>

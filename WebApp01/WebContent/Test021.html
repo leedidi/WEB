@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test021.html</title>
+</head>
+<body>
+
+<div>
+	<h1>전송, 취소 버튼 만들기</h1>
+	<hr>
+</div>
+
+<div>
+	<!-- 데이터 전송 및 페이지 요청 -->
+	<!--@ 둘 다 떨어질수 없는 관계! 마치 두꺼비의 헌집 주면 새집 줄게, 헌집-새집의 관계 --> 
+	<form action="http://localhost:8090/WebApp01/Test022.html">
+	<!--<form action="http://localhost:8090/webApp01/Test022.html">-->
+		*이름 <input type="text" name="name" size="15" maxlength="8">
+		<br>
+		*이메일 <input type="text" name="email" size="15" maxlength="20">
+		<br>
+		*하고싶은 말<br>
+		<textarea rows="10" cols="50" name="field"></textarea>
+		<br><br>
+		
+		<!--@ submit : 서버 쪽에 제출한다. 
+		Like... 그냥 형광펜 체크만해서 대리점에 낸다고 기기 개통 되지 않음.
+		휴대폰 대리점에서, 형광펜 체크한 부분 팩스로 통신사로 보내야 기기 개통 수행 가능! 
+		이것처럼 우리가 기재한 내용이 서버로 전송 되어야 함 -->
+		<input type="submit" value="전송하기" name="submitBtn">
+		
+		<br><br>
+		<input type="button" value="test1">
+		
+		<button type="button">
+			<img alt="" src="images/btn_03.png">
+		</button>
+		
+		<button type="submit">test3</button>
+		<input type="submit" value="test4">
+		<button>test5</button>
+		<!-- button에서 타입 명시안하면 Submit임! 위두개/아래세개 같음 -->
+		<br><br>
+		
+		
+		
+		<input type="reset" value="다시쓰기">
+	</form>
+</div>
+
+
+
+
+</body>
+</html>

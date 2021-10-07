@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test020.html</title>
+</head>
+<body>
+
+<div>
+	<!--@ 라디오에 FM/AM 버튼 있음... 둘다 동시에 볼 수는 없음! 
+	하나만 고르면 나머지에서는 다중선택 허용되면 안 됨. 그래서 라디오 버튼이라고 부르는 것 
+	    @ 즉, 하나 선택하면 다른값 가질수 없다는 것... 가장 중요한 특징! 
+	    @ 즉! 같은 네임속성(네임값) 가져야 한다는 것... 앞 체크박스와 같고, 더 중요한 특징임! 
+	    @ 이하 내용은 기억해 두기! -->
+	
+	<h1>라디오 버튼 만들기</h1>
+	<hr>
+</div>
+
+<div>
+	<form>
+		<p>1. 당신의 성별은?</p>
+		<input type="radio" name="gender" checked="checked" value="female" id="f">
+		<label for="f">여자</label>
+		<input type="radio" name="gender" value="male" id="m">
+		<label for="m">남자</label>
+		<br><br>
+		
+		<p>2. 당신이 좋아하는 과목은?</p>
+		<label></label><input type="radio" name="subject" checked="checked" value="kor"> 국어</label>
+		<label><input type="radio" name="subject" value="eng"> 영어</label>
+		<label><input type="radio" name="subject" value="mat"> 수학</label>
+		<label><input type="radio" name="subject" value="soc"> 사회</label>
+		<label><input type="radio" name="subject" value="sci"> 과학</label>
+		<br><br>
+		
+	</form>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>
