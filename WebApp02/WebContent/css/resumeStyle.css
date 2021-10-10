@@ -1,0 +1,10 @@
+body
+{
+	background: liner-gradient(-135deg, #E4A972, #9941D8) fixed;
+}
+
+div
+{
+	margin: 120px 0;
+	text-align:center;
+}
