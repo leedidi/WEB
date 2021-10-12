@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test014.html</title>
+
+<script type="text/javascript">
+<!--	
+	// msg 변수 → 함수 밖에 선언 → 모든 함수에서 접근 가능한 전역 변수
+	var msg = "2021년 10월의 한 가운데에서...";
+	//-- 『var』 키워드 사용 여부와 관계없이 전역 변수의 형태로 기능하는 상황
+	
+	function buttonOnclick1()
+	{
+		//alert("첫 번째 버튼 클릭");
+		
+		alert(msg);
+		
+		// var 키워드 포함 → name 변수 → 함수 내부에 선언 → 지역 변수
+		//var name = "송해덕"; - @★(중요)
+		//@ 지역변수! buttonOnclick1 안에서만 볼 수 있음
+		
+		// var 키워드 생략 → name 변수 → 함수 내부에 선언 → 상황에 따른 지역/전역 변수
+		//@ 그래서 나왔다, 안 나왔다 함....! 
+		//@ 여기를 수행한 이후엔(첫번째 버튼 클릭 이후에는) buttonOnclick2 에서도 이름 출력 가능. 
+		//@ 수행하기 전에는 값이 안 담겨있는 상황이라 buttonOnclick2 에서 이름 출력 불가능.
+		
+		//@ ※ 여기 잘 기억해 두기! 실수 많이 하는 부분임...!
+		name = "김진희"; - @★(중요)
+		document.write("이름 : " + name);
+		
+	}
+	
+	function buttonOnclick2()
+	{
+		//alert("두 번째 버튼 클릭");
+		
+		alert(msg);
+		
+		document.write("이름 : " + name);
+	}
+//-->
+//@ 예전 코딩하시던 분들이 이렇게 사용... 브라우저별로 javascript 지원안해서 오류나는 경우 있었기 때문에
+//@ html 형식으로 주석처리 해 놓으면 오류나지 않았기 때문! 현재에는 XX
+</script>
+
+<noscript>
+	자바스크립트가 사용되지 못할 경우 표현되는 영역
+</noscript>
+
+
+</head>
+<body>
+
+<!--@ onclick : 버튼 누르면 이같은 이벤트 발생하게 하겠다!  -->
+<input type="button" id="button1" value="Button" onclick="buttonOnclick1()"><br>
+<input type="button" id="button2" value="Button" onclick="buttonOnclick2()">
+
+
+</body>
+</html>

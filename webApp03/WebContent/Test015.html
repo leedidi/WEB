@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test015.html</title>
+
+<style type="text/css">
+	input.box:focus 
+	{
+		background-color: yellow;
+	}
+	input.boxSu
+	{
+		width: 50px;
+	}
+
+</style>
+
+<script type="text/javascript">
+
+	function btnAonclick()
+	{
+		//alert("A버튼 클릭~!!!");
+		//@ Element를 id로 가져오겠다...가져올 아이디는 txtLeft
+		//@ document = Test015 이거 자체 의미!
+		
+		//alert(document.getElementById("txtLeft"));
+		//alert(document.getElementById("txtLeft").value);
+		
+		var txt01 = document.getElementById("txtLeft");
+		var txt02 = document.getElementById("txtRight");
+		
+		var leftStr = txt01.value;
+		//var leftStr = document.getElementById("txtLeft").value;
+		
+		txt02.value = leftStr;
+	}
+	
+	function btnBonclick()
+	{
+		//alert("B버튼 클릭~!!!");
+		
+		var txt01 = document.getElementById("txtLeft");
+		var txt02 = document.getElementById("txtRight");
+		var rightStr = txt02.value;
+		txt01.value = rightStr;
+	}
+	
+	function btnResultonclick()
+	{
+		// 테스트
+		//alert("버튼 클릭~!!!");
+		/*
+		// 내가 작성한 코드
+		var txt01 = document.getElementById("txtSu1");
+		var txt02 = document.getElementById("txtSu2");
+		var suResult = txt01.value+ txt02.value;
+		txtResult = suResult.value;
+		*/
+		
+		// 함께 작성한 코드
+		var num1 = document.getElementById("txtSu1").value;
+		var num2 = document.getElementById("txtSu2").value;
+		
+		//var result = document.getElementById("txtResult");
+		
+		//# : 선생님은 지우신 부분!
+		//# result.value = num1 + num2; //@--==> 1223. 문자열 결합. 위는 기본으로 문자타입으로 받아오기 때문
+		//# result.value = parseInt(num1 + num2); //@--==>> 1223. 문자열끼리 결합된 결과값이 숫자로 바뀜
+		
+		//@ 이아래로 바뀌어도 상관X
+		//var result = num1 + num2;
+		//var result = parseInt(num1 + num2);
+		
+		//@ parseInt => 문자열을 숫자로 바꿈
+		//# result.value = parseInt(num1) + parseInt(num2);
+		
+		//var result = parseInt(num1) + parseInt(num2);
+		//					  "12"			   "23"
+		//			 --------------   --------------
+		//                 12               23
+		
+		
+		var result = Number(num1) + Number(num2);
+		//@ parseInt는 내장함수, Number : 생성자함수 (문법적 의미는 다소 차이가 있음)
+		//@ 앞글자 대문자.... 생성자함수, 객체....
+		
+		document.getElementById("txtResult").value = result;		
+		
+		
+		// document.getElementById("txtResult").value
+		// = parseInt(document.getElementById("txtSu1").value) + parseInt(document.getElementById("txtSu2").value);
+		//@ 요 형태가 토막토막 잘라진 형태로 위처럼 표현된 것...
+		
+	}
+
+</script>
+
+</head>
+<body>
+
+<div>
+	<br>
+	<input type="text" class="box" id="txtLeft"> 
+	<input type="button" value="A버튼" class="btn" id="btnA" onclick="btnAonclick()">
+	<input type="button" value="B버튼" class="btn" id="btnB" onclick="btnBonclick()">
+	<input type="text" class="box" id="txtRight">
+	<hr>
+	<input type="text" class="boxSu" id="txtSu1">
+	+
+	<input type="text" class="boxSu" id="txtSu2">
+	<input type="button" value=" = " class="btn" id="btnResult" onclick="btnResultonclick()">
+	<input type="text" class="boxSu" id="txtResult">
+</div>
+
+</body>
+</html>

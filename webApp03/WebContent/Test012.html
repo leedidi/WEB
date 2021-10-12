@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test012.html</title>
+
+<script type="text/javascript">
+	
+	message = "<h1>Hello~!!!</h1>";
+	document.write(message);
+	//@ 태그 사용해서 출력 가능
+	
+	alert(message);
+	//@ 본문 형태 사용해서 경고창 뜸
+	//@ 경고창이 뜨고 확인 버튼 누르면 본문내용 확인
+
+</script>
+
+<script type="text/javascript" src="js/alertTest.js">
+//@ 이 사이에 스크립트 내용들 사용할수 X 
+//@ 스크립트 내용없지만 같은 스트립트기 때문에... message 변수 사용가능!
+//@ 변수 스크립트 내에서 같이 보여짐!!!
+//@ 몇 번이든 스크립트 사용 가능!
+</script>
+
+<script type="text/javascript">
+
+	// Date 내장 객체 : 현재 시스템의 날짜와 시간
+	// var dt = Date().toString(//@ 자바로 치면 이거 사용한거!)
+	var dt = String(Date());
+	document.write(dt);
+	
+</script>
+
+</head>
+<body>
+
+</body>
+</html>
