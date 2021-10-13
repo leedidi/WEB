@@ -3,17 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <title>Test017.html</title>
+
 <style type="text/css">
 	* {color: #223322;}
 	input {font-family: 나눔고딕코딩; font-weight: bold;}
-	input: focus {background: #eeeedd;}
+	input:focus {background: #eeeedd;}
 	input.btn {width: 90px; font-weight: bold; font-family: 맑은 고딕;}
 	input.btn:hover {color: orange;}
 	td {text-align: center;}
 	.txt {text-align: right;}
 </style>
-<script type="text/javascript">
 
+<script type="text/javascript">
+	function myCalc()
+	{
+		// 확인
+		//alert("함수 호출 확인~!!!");
+		
+		var moneyStr = document.getElementById("money").value;
+		var money = parseInt(moneyStr);
+		document.getElementById("totalMoney").value = money; 
+		//@ 해당 입력칸
+		
+		//@ 변수는 미리 선언안해도 됨! 쓰면서 필요할 때 만들어도 ㅇㅋ
+		var m500 = parseInt(money/500);		// var m500 = Math.floor(money/500);
+											//@ floor : 소수점 이하 나머지 절삭시키는 함수. 	
+		// 확인
+		//alert(m500);
+		/*
+		alert(123.456);
+		alert(parseInt(123.456));
+		
+		alert(123.456);
+		alert(Math.floor(123.456));
+		*/
+		
+		money = money%500; //@ 기존 총액을 500으로 나눈 나머지
+		var m100 = parseInt(money/100)		// var m100 = Math.floor(money/100);
+		money = money%100;
+		var m50 = parseInt(money/50);		// var m50 = Math.floor(money/50);
+		money = money%50;
+		var m10 = parseInt(money/10);		// var m10 = Math.floor(money/10);
+		
+		
+		document.getElementById("m500").value = m500;
+		document.getElementById("m100").value = m100;
+		document.getElementById("m50").value = m50;
+		document.getElementById("m10").value = m10;
+		
+	}
+	
 </script>
 
 
@@ -23,6 +62,10 @@
       테이블보다 div로 잡는 게 바람직! 가능하면 div로 잡는 습관 들이기!  -->
 <!--@ 스타일은 선생님 따라하지 말깈ㅋㅋㅋㅋ 실무 나가서도 이거 제가 할게요! 하고 많이 해보는 게 좋음-->  
 <!--@ CSS는 디자인 여러개 바꿔보고, 만지작 만지작 해보기... 많이 만지작 거릴수록 늘음! 자꾸 건드려 보기 -->
+
+<!--@ html 틀 - css 디자인 - 그후 자바스크립트로 기능동작...이게 일반적 작업순서!
+    @ But, 모든 디자인 완벽히 끝내놓고 기능 운용하겠다 하지말고, html 기본구조 잡아놓고 크기 엉망진창이지 않도록
+    @ 색조화장까지X, 기초화장까지 해 두고 기능구현, 그 이후에 시간이 남으면 그때 색조화장 하기 -->
  
 <!-- 
 	특정 금액(10원 ~ 990원)을 사용자로부터 입력받아
@@ -71,7 +114,7 @@
 			</tr>
 			<tr>
 				<td colspan="3">
-				<input type="button" value="결과" class="btn">
+				<input type="button" value="결과" class="btn" onclick="myCalc()">
 				<input type="reset" value="취소" class="btn">
 				</td>
 			</tr>

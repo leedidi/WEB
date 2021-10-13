@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test019.html</title>
+
+<style type="text/css">
+	* {color: #223322;}
+	input {font-fmaily: 나눔고딕코딩; font-weight: bold;}
+	input:focus {background: #eeeedd;}
+	/* input btn 적용 x 아 이거 가까운게 더 우선순위로 적용되서..??? -> 맞음 이거였음ㅋㅋㅋ 적용은 되는 것! */
+	input.btn {width: 90px; font-weight: bold; font-family: 맑은 고딕;} 
+	input.btn:hover {color: orange;}
+	.txt {text-align: right;}
+	textarea {font-family: 나눔고딕코딩; font-weight: bold;}
+</style>
+
+<script type="text/javascript">
+
+	function myCalc()
+	{
+		// 확인
+		//alert("함수 호출 확인");
+		
+		//@ 초기화 되어야하는데 안댐..확인해보기 -> 초기화 되는 거였음ㅋㅋ
+		document.getElementById("result").value = "";
+		
+		var nNum = Number(document.getElementById("num").value);
+		var nSum = 0;
+		
+		if (nNum <100 )
+		{
+			alert("입력값은 100 이상만 가능합니다.");
+			return;
+		}
+		//@ 자바스크립트의 리턴키워드는 자바에서의 그것과 같다...!
+		//@ 바꾸고, 테스트, 바꾸고, 테스트... 귀찮아하지말고 많이 반복하기!!! 이게 경험치임!
+		
+		for (var n=1; n<=nNum; n++)
+		{
+			nSum += n;
+			
+			//document.getElementById("result").value = "1 ~ " + n + " : " + nSum;
+			//document.getElementById("result").value += "1 ~ " + n + " : " + nSum;
+			//document.getElementById("result").value += "1 ~ " + n + " : " + nSum + "<br>";
+			//@ 엔터칠때 "<br>" 로 사용하지 않음!
+			//document.getElementById("result").value += "1 ~ " + n + " : " + nSum + "\n";
+		
+			if (n%10==0)	// n 이 10의 배수
+			{
+				document.getElementById("result").value += "1 ~ " + n + " : " + nSum + "\n";
+			}
+		}
+		
+		//@ 위의 n++ 못돌아갈때 의미없이 하나 더해짐.. 이거 감소해주기
+		//--n;
+		
+		document.getElementById("result").value += "1 ~ " + nNum + " : " + nSum + "\n";
+	}
+</script>
+
+</head>
+<body>
+
+<!-- 
+	1 부터 n 까지의 합을 계산하되 n 은 100 이상만 허용하고
+	출력 시 10의 배수가 될 때 마다 중간 합을 출력할 수 있는 페이지를 구성한다.
+	반복문을 활용할 수 있도록 한다.
+	
+	HTML, CSS, Javascript 활용
+	
+	페이지 레이아웃
+	---------------------------------------------------------
+	정수 입력(100 이상) [   100    ] → 조건 유효성		num
+	
+		< 결과 >    < 취소 >
+		
+	-----------------------------  → textarea			result
+	|1 ~ 10 : 55				|
+	|1 ~ 20 : 210               |
+	|1 ~ 30 : xxx               |
+	|   :                       |
+	|1 ~ 100: 5050              |
+	-----------------------------
+	-----------------------------------------------------------
+
+ -->
+
+<div>
+	<h1>자바스크립트 활용</h1>
+	<hr>
+</div>	
+
+<div>
+	<form>
+		<div>
+			정수 입력(100 이상)
+			<input type="text" id="num" class="txt" style="width: 150px;">
+		</div>
+		<br>
+		<div>
+			<input type="button" value="결과" class="btn" style="width: 150px;" onclick="myCalc()">
+			<input type="reset" value="취소" class="btn" style="width: 150px;">
+		</div>
+		<br>
+		<div>
+			<textarea rows="10" cols="43" id="result" readonly="readonly"></textarea>
+		</div>
+		<!--@ div.. 보통 같이 다녀야하는 아이들 끼리 묶음  -->
+	</form>
+	
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
