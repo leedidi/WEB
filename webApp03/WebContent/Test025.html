@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test025.html</title>
+
+<style type="text/css">
+	* {color: #223322;}
+	input {font-family: 나눔고딕코딩; font-weight: bold;}
+	input:focus {background: #eeeedd;}
+	.btn {width: 90px; font-weight: bold; font-family: 맑은 고딕;}
+	.btn:hover {color: orange;}
+	td {text-align: right;}
+	.txt {text-align: left; font-weight: bold;}
+</style>
+
+<script type="text/javascript">
+
+	function manunCal()
+	{	
+		// 같이한건 Test025_1로 가기~~!!!
+		
+		//테스트
+		//alert("버튼 클릭 완료!");
+		
+		// 내가 작성한 코드
+		/*
+		// 각 달이 담고있는 마지막 날짜(매 월의 최대 날짜)
+		var days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+		
+		var yearStr = document.getElementById("txtYear").value;
+		var year = Number(yearStr);
+		var monthStr = document.getElementById("txtMonth").value;
+		var month = Number(monthStr);
+		
+		// 입력받은 년도에 해당하는 2월의 마지막 날 계산
+		if ((y%4==0 && y%100!=0 || y%400==0))
+		{
+			days[1] = 29;
+		}
+		
+		// 1년 1월 1일 ~ 입력년도 이전 년의 12월 31일까지의 날 수 계산
+		var nalsu = (year-1)*365 + (year-1)/4 - (year-1)/100 + (year-1)/400;
+		
+		// 입력받은 년도 1월 1일 ~ 입력한 월의 이전 월까지의 날 수 누적 연산
+		for (var i=0; i<(m-1); i++)
+		{
+			nalsu += Number(days[i]);
+		}
+		
+		// 입력받은 월의 1일을 날 수 누적 연산
+		nalsu += 1;
+		
+		var w = nalsu%7;
+		
+		// 테이블 접근 권한 부여
+		var tableNode = document.getElementById("calendarTbl");
+		
+		
+		
+		var trNode = document.createElement("tr");
+		
+		// 특정 요일부터 1일이 출발할 수 있도록 공백 발생(지정)
+		for (var i=1; i<=w; i++)
+		{
+			//공백 칸 지정..-> <th></th> 생성되게?
+			tr
+		}
+		
+		// 입력 월의 날짜들이 출력될 수 있도록 반복문 구성
+		for (var i=1; i<=days[m-1]; i++)
+		{
+			document.createTextnode(i);	// 1 2 3 4....
+			w++;						// 날짜 하나 처리할때마다 요일도 증가
+			
+			if (w%7 == 0)				// 일요일일 경우
+			{	
+				//@ 공백 + 날짜 포함해서 7로 나눴을 때 0이면 줄바꿈을 하시면 됩니다
+				//@ 새로운 tr을 만들어서 적재하면 줄바꿈이 됨!
+				// 개행.. 다음 <tr>로 넘어감
+			}
+		}
+		*/
+		
+		// 다른 분의 코드
+		// 각 달이 담고있는 마지막 날짜(매 월의 최대 날짜)
+		var days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+		
+		var yearStr = document.getElementById("txtYear").value;
+		var year = Number(yearStr);
+		var monthStr = document.getElementById("txtMonth").value;
+		var month = Number(monthStr);
+		
+		// 입력받은 년도에 해당하는 2월의 마지막 날 계산
+		if ((y%4==0 && y%100!=0 || y%400==0))
+		{
+			days[1] = 29;
+		}
+		
+		// 1년 1월 1일 ~ 입력년도 이전 년의 12월 31일까지의 날 수 계산
+		var nalsu = (year-1)*365 + (year-1)/4 - (year-1)/100 + (year-1)/400;
+		
+		// 입력받은 년도 1월 1일 ~ 입력한 월의 이전 월까지의 날 수 누적 연산
+		for (var i=0; i<(m-1); i++)
+		{
+			nalsu += Number(days[i]);
+		}
+		
+		// 입력받은 월의 1일을 날 수 누적 연산
+		nalsu += 1;
+		
+		var w = nalsu%7;
+		
+		// 테이블 접근 권한 부여
+		var tableNode = document.getElementById("calendarTbl");
+		
+		
+		var n = 1;
+		var d = 0;
+		
+		var j = 1;
+		do
+		{
+			var trNode = document.createElement("tr");
+			
+			for (var i=7; i<array.length; i++)
+			{
+				if (d<w)
+				{
+					trNode.appendChild(createTdNode(" "));
+					d++;
+				}
+				else
+				{
+					trNode.appendChild(createTdNode(n));
+					n++;
+				}
+				
+				if (n>day[month-1])
+					break;
+			}
+			
+			tableNode.appendChild(trNode);
+			j++;
+			
+		}
+		while(j<= Math.ceil((day[month-1]+w)/7))
+	}
+
+</script>
+
+</head>
+<body>
+
+<div>
+	<h1>테이블 동적 생성으로 만년달력 그리기</h1>
+	<hr>
+</div>
+
+<div>
+	<form>
+		<input type="text" id="txtYear" class="txt" style="width: 67px;"> 년
+		<input type="text" id="txtMonth" class="txt" style="width: 67px;"> 월
+		<br><br>
+		
+		<button type="button" class="btn" style="width: 200px;" onclick="manunCal()">만년달력 그리기</button>
+		<br><br>
+		
+		<table border="1" id="calendarTbl">
+			<tr>
+				<th>일</th>
+				<th>월</th>
+				<th>화</th>
+				<th>수</th>
+				<th>목</th>
+				<th>금</th>
+				<th>토</th>
+				<th>일</th>
+			</tr>
+		</table>
+	</form>
+</div>
+
+</body>
+</html>

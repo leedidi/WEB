@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test024.html</title>
+
+<script type="text/javascript">
+
+	function addMember()
+	{
+		// 확인
+		//alert("함수 호출 확인");
+		
+		var name = document.getElementById("txtName").value;
+		var tel = document.getElementById("txtTel").value;
+		var addr = document.getElementById("txtAddr").value;
+		
+		// 테스트
+		//alert(name + " " + tel + " " + addr);
+		
+		// table 엘리먼트 접근
+		//@ table값 가질수 있게....tableNode는 걍 우리가 만든 변수명
+		var tableNode = document.getElementById("memberTbl");
+		
+		// tbody 엘리먼트 접근 → 사용하지 않는 경우 생략
+		// ※ 주의. 브라우저에 따라 다른 결과
+		//@ 크로스 브라우징 : 이 브라우저에서도, 저 브라우저에서도 돌아갈 수 있도록...
+		
+		/*
+		var tbodyNode = null;
+		if (tableNode.childNodes[0].nodeType==1)
+		{
+			tbodyNode = tableNode.childNodes[0];	// IE(@인터넷 익스플로러에서 tbodyNode 얻는 방법)
+		}
+		else
+		{
+			tbodyNode = tableNode.childNodes[1];	// CR, FF, ...(@기타 브라우저(크롬, 파이어폭스 등)에서 tbodyNode 얻는 방법)
+		}
+		//@ 요즘은 잘 하지 않는 방법이기 때문에... 브라우저별로 다른 어떤 것들이 있다 정도 알아두기
+		//@ 우리는 지금 사용하지 X, 주석처리해둠
+		*/
+		
+		// alert(tableNode.childNodes[0].nodeType);
+		
+		// <tr></tr> 엘리먼트 동적 생성
+		// <td></td> 엘리먼트 동적 생성
+		
+		// "최수지" 텍스트 데이터를 위에서 생성한 <td> 엘리먼트에 추가
+		// → <td>"최수지"</td>
+		
+		// 위에서 구성된 <td> 엘리먼트를 더 위에서 생성한 <tr> 엘리먼트에 추가
+		// → <tr><td>"최수지"</td></tr>
+		
+		// 전화번호와 주소도 같은 방법으로 추가하는 처리
+		
+		var trNode = document.createElement("tr");			// <tr></tr>
+		
+		/*
+		var tdNode1 = document.createElement("td");			// <td></td>
+		var nameNode = document.createTextNode(name);		// <td> 노드에 추가할 "최수지" 텍스트 노드 생성
+		
+		var tdNode2 = document.createElement("td");			// <td></td>
+		var telNode = document.createTextNode(tel);			// <td> 노드에 추가할 "010-4444-4444" 텍스트 노드 생성
+		
+		var tdNode3 = document.createElement("td");			// <td></td>
+		var addrNode = document.createTextNode(addr);		// <td> 노드에 추가할 "경기 분당" 텍스트 노드 생성
+	
+		//@ append.. 추가해서 붙임. appendChild.. 자식으로 붙임. 하위 요소로 붙임
+		tdNode1.appendChild(nameNode);						// <td>"최수지"</td>
+		tdNode2.appendChild(telNode);						// <td>"010-4444-4444"</td>
+		tdNode3.appendChild(addrNode);						// <td>"경기 분당"</td>
+		
+		trNode.appendChild(tdNode1);						// <tr><td>"최수지"</td></tr>
+		trNode.appendChild(tdNode2);						// <tr><td>"최수지"</td><td>"010-4444-4444"</td></tr>
+		trNode.appendChild(tdNode3);						// <tr><td>"최수지"</td><td>"010-4444-4444"</td><td>"경기 분당"</td></tr>		
+		*/
+		
+		/*위의 /~/ 부분 아래 세줄로 완료 가능!*/
+		trNode.appendChild(createTdNode(name));
+		trNode.appendChild(createTdNode(tel));
+		trNode.appendChild(createTdNode(addr));
+		
+		tableNode.appendChild(trNode);						// <table id="memberTbl"><tr><td>"최수지"</td><td>"010-4444-4444"</td><td>"경기 분당"</td></tr></table>
+		
+		
+	}
+	
+	function createTdNode(val)
+	{
+		var textNode = document.createTextNode(val);
+		var tdNode = document.createElement("td");
+		tdNode.appendChild(textNode);
+		return tdNode;
+	}
+	// 여기 안댐...확인... -> 확인 완료!
+
+</script>
+
+</head>
+<body>
+
+<div>
+	<h1>자바스크립트를 활용한 테이블 동적 생성</h1>
+	<hr>
+</div>
+
+<div>
+	<form>
+		<!--@ 집중! 다른 페이지보다 집중하기. 여태까지 하던 방식과는 다른 방식 적용될것! -->
+		이름 <input type="text" id="txtName" class="txt"><br>
+		전화번호 <input type="text" id="txtTel" class="txt"><br>
+		주소 <input type="text" id="txtAddr" class="txt"><br>
+		<br>
+		<button type="button" onclick="addMember()">회원 정보 입력</button>
+		<br><br><br>
+		
+		<table border="1" id="memberTbl">
+			<tr>
+				<td>이름</td><td>전화번호</td><td>주소</td>
+			</tr>	
+			<tr>
+				<td>김진희</td><td>010-1111-1111</td><td>제주 서귀포</td>
+			</tr>
+			<tr>
+				<td>윤유동</td><td>010-2222-2222</td><td>서울 은평구</td>
+			</tr>
+			<tr>
+				<td>장민지</td><td>010-3333-3333</td><td>전남 여수</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+

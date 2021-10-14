@@ -99,8 +99,52 @@
 		} while (true);
 		
 		// 석차(등수) 계산
+		//@ arr.length하면 안 됨! [0]은 몇번째 방이든 상관 X
+		for (var i=0; i<arr[0].length; i++)
+		{
+			for (var j=0; j<arr[0].length; j++)
+			{
+				if (i==j)
+				{
+					continue;
+					//@ 뒷부분(아래 if부분) 무시하고 계속해라!
+				}	
+				
+				if (Number(arr[4][i]) < Number(arr[4][j]))	// 총점 비교		//
+				{																//
+					// i번째 학생의 등수(arr[5][i])를 1만큼 증가				// continue 기준 뒷부분
+					arr[5][i] = (Number(arr[5][i]) + 1).toString();				//
+					//@ .toString-> 문자로 만듬									//
+				}																//
+				
+			}
+		}
+		
+		//------- 여기까지 수행하면 arr 배열 구성 끝~!!!
+		
+		
+		var result = "";
+		
+		for (var j=0; j<arr[0].length; j++)
+		{
+			for (var k=0; k<arr.length; k++)
+			{
+				//alert(k + " " + j);
+				result += arr[k][j] + "  ";
+			}
+			result += "\n";
+			//@ for문 안에서의 개행은 "\n"!
+		}
+		
+		//@ arr.lengh : 이름~등수 갯수
+		document.getElementById("txtCount").value = arr[0].length;
+		
+		document.getElementById("memberList").value = "이름  국어 영어 수학 총점 등수\n";
+		document.getElementById("memberList").value += result;
+		
 		
 	}
+	
 </script>
 
 </head>
