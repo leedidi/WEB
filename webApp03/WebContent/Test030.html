@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test030.html</title>
+
+<style type="text/css">
+	* {color: #223322; font-family: 맑은 고딕; font-weight: bold;}
+	.btn {width: 200px; height: 40px; font-size: 20px;}
+</style>
+
+<script type="text/javascript">
+
+	var cnt = 0;			//-- 선택할 수 있는 아이스크림의 갯수
+							//@ 앞에서 한거랑 Same... 다른 거라곤 다른 함수에서도 쓸수있도록 전역변수로 빼놓은 거만 다름!
+	var userCnt = 0;		//-- 사용자가 선택한 아이스크림의 갯수
+	
+	function countSet(val)
+	{
+		// 확인
+		//alert("함수 호출 확인");
+		//alert(val);
+		
+		// 선택할 수 있는 아이스크림의 갯수 설정
+		cnt = parseInt(val);
+		
+		alert("당신이 선택할 수 있는 아이스크림의 갯수는 " + cnt + " 입니다.");
+	
+	}
+	
+	function actionChoice(obj)
+	{
+		// 확인
+		//alert("함수 호출 확인");
+		//alert("체크되어 있는지의 여부");
+		//@ obj : 객체 자체....
+		//alert(obj.checked);
+		//-- 체크 설정되며 클릭된 상황 vs 체크 해제되며 클릭된 상황 → 판단 가능	
+		
+		//@ cnt, userCnt 비교!
+		//@ 체크선택시 userCnt 하나 증가, 해제시 userCnt 하나 감소. 
+		//@ 선택시 기존 cnt 넘어가지 않게끔 하기!
+		//@ 맞말...^_ㅠ
+		//--==>> true / false → 클릭 액션에 의해 check 되었을 때 true
+		
+		/*
+		// 내가 작성한 코드 1
+		function icecreamLimitRadio()
+		{
+			var radioObj = document.getElementByName("radioGroup");
+			var msg = "";
+			
+			if (condition)
+			{
+				
+			}
+		}
+		
+		function icecreamLimitCheck()
+		{
+			var check
+			
+		}
+		
+		// 내가 작성한 코드 2
+		if (obj.checked == true)
+			userCnt++;
+		else if (obj.checked == false)
+			userCnt--;
+		
+		//alert(userCnt);
+		
+		if (userCnt > cnt)
+		{
+			// 체크박스 선택 안되게를 어떻게하짘,,,,,????
+			alert("선택 가능한 아이스크림 개수를 초과했습니다!");
+			obj.checked = false;
+			return false;
+		}
+		*/
+		
+		if (obj.checked)
+		{
+			if (userCnt >= cnt)
+			{
+				alert("선택할 수 있는 갯수를 초과하였습니다.");
+				obj.checked = false;								// check~!!! //@ 체크한 코드 체크 안 되도록 처리!
+				return;
+			}
+
+			// 사용자가 선택한 갯수 증가
+			userCnt++;
+		}
+		else
+		{
+			//사용자가 선택한 갯수 감소			
+			userCnt--;
+		}
+		
+		// 확인
+		//alert(cnt + " | " + userCnt);
+	}
+
+</script>
+
+</head>
+<body>
+<!--@ 문제 : ex> 패밀리(5)개 선택시 5개까지만 아이스크림 선택 가능하게... 취소는 가능하도록!  
+    @ 각각의 컨트롤들에 다 조건 걸려 있어야 함! 
+    @ 문제 해결해라! 라는 의미가 아니라.. 선택값들에 대해 어떤 값을 어떻게 컨트롤하는지, 를 해보라는 의도! -->
+
+<div>
+	<h1>자바스크립트 활용</h1>
+	<hr>
+</div>
+
+<div>
+	<h2>라디오버튼, 체크박스 다루기</h2>
+	
+	<form>
+		--- 사이즈 선택 ---<br><br> 
+		<!-- <input type="radio" name="radioGroup" id="a1" value="1" onclick="countSet(this.value)"><label for="a1">싱글(1)</label> -->
+		<input type="radio" name="radioGroup" id="a1" value="1" onclick="countSet(1)"><label for="a1">싱글(1)</label>
+		<input type="radio" name="radioGroup" id="b1" value="2" onclick="countSet(2)"><label for="b2">더블(2)</label>
+		<input type="radio" name="radioGroup" id="c1" value="3" onclick="countSet(3)"><label for="c3">파인트(3)</label>
+		<input type="radio" name="radioGroup" id="d1" value="4" onclick="countSet(4)"><label for="d4">쿼터(4)</label>
+		<input type="radio" name="radioGroup" id="e1" value="5" onclick="countSet(5)"><label for="e5">패밀리(5)</label>
+		<input type="radio" name="radioGroup" id="f1" value="6" onclick="countSet(6)"><label for="f6">하프갤런(6)</label>
+		<br><br>
+		
+		
+	   --- 종류 선택 --- <br><br>
+	  <input type="checkbox" name="checkGroup" id="a2" value="민트" onclick="actionChoice(this)"><label for="a2">민트초코</label>
+      <input type="checkbox" name="checkGroup" id="b2" value="바람" onclick="actionChoice(this)"><label for="b2">바람과함께사라지다</label>
+      <input type="checkbox" name="checkGroup" id="c2" value="사랑" onclick="actionChoice(this)"><label for="c2">사랑에빠진딸기</label>
+      <input type="checkbox" name="checkGroup" id="d2" value="슈팅" onclick="actionChoice(this)"><label for="d2">슈팅스타</label><br>
+      <input type="checkbox" name="checkGroup" id="e2" value="레인" onclick="actionChoice(this)"><label for="e2">레인보우샤베트</label>
+      <input type="checkbox" name="checkGroup" id="f2" value="봉봉" onclick="actionChoice(this)"><label for="f2">아몬드봉봉</label>
+      <input type="checkbox" name="checkGroup" id="g2" value="엄마" onclick="actionChoice(this)"><label for="g2">엄마는외계인</label>
+      <input type="checkbox" name="checkGroup" id="h2" value="요거" onclick="actionChoice(this)"><label for="h2">요거트</label>
+      <input type="checkbox" name="checkGroup" id="i2" value="초코" onclick="actionChoice(this)"><label for="i2">초콜렛</label><br>
+      <input type="checkbox" name="checkGroup" id="j2" value="뉴욕" onclick="actionChoice(this)"><label for="j2">뉴욕치즈케이크</label>
+      <input type="checkbox" name="checkGroup" id="k2" value="피스" onclick="actionChoice(this)"><label for="k2">피스타치오아몬드</label>
+      <input type="checkbox" name="checkGroup" id="l2" value="이상" onclick="actionChoice(this)"><label for="l2">이상한나라의솜사탕</label><br>
+      <input type="checkbox" name="checkGroup" id="m2" value="쿠키" onclick="actionChoice(this)"><label for="m2">쿠키앤크림</label>
+      <input type="checkbox" name="checkGroup" id="n2" value="체리" onclick="actionChoice(this)" checked="checked"><label for="n2">체리쥬빌레</label>
+		
+		<!-- 
+		--- 종류 선택 --- <br><br>
+	  <input type="checkbox" name="checkGroup" id="a2" value="민트"><label for="a2">민트초코</label><br>
+      <input type="checkbox" name="checkGroup" id="b2" value="바람"><label for="b2">바람과함께사라지다</label><br>
+      <input type="checkbox" name="checkGroup" id="c2" value="사랑"><label for="c2">사랑에빠진딸기</label><br>
+      <input type="checkbox" name="checkGroup" id="d2" value="슈팅"><label for="d2">슈팅스타</label><br>
+      <input type="checkbox" name="checkGroup" id="e2" value="레인"><label for="e2">레인보우샤베트</label><br>
+      <input type="checkbox" name="checkGroup" id="f2" value="봉봉"><label for="f2">아몬드봉봉</label><br>
+      <input type="checkbox" name="checkGroup" id="g2" value="엄마"><label for="g2">엄마는외계인</label><br>
+      <input type="checkbox" name="checkGroup" id="h2" value="요거"><label for="h2">요거트</label><br>
+      <input type="checkbox" name="checkGroup" id="i2" value="초코"><label for="i2">초콜렛</label><br>
+      <input type="checkbox" name="checkGroup" id="j2" value="뉴욕"><label for="j2">뉴욕치즈케이크</label><br>
+      <input type="checkbox" name="checkGroup" id="k2" value="피스"><label for="k2">피스타치오아몬드</label><br>
+      <input type="checkbox" name="checkGroup" id="l2" value="이상"><label for="l2">이상한나라의솜사탕</label><br>
+      <input type="checkbox" name="checkGroup" id="m2" value="쿠키"><label for="m2">쿠키앤크림</label><br>
+      <input type="checkbox" name="checkGroup" id="n2" value="체리"><label for="n2">체리쥬빌레</label><br>
+       -->
+       
+
+	</form>
+</div>
+
+</body>
+</html>
