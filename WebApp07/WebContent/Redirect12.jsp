@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <% 
-	// Forward11_1.jsp
+	// Redirect12.jsp
 	
+	/*
 	// 이전 페이지(Send11.html)로부터 데이터(num1, num2, calResult) 수신
 	
 	int num1 = Integer.parseInt(request.getParameter("num1"));
@@ -25,7 +26,8 @@
 	//@ 11이랑 비교해서 이거 두줄 있는 것! 아래 JSP 다 없어도 됨~!(삭제해버림) 자바 코드만 사용하면 됨
 	RequestDispatcher dispatcher = request.getRequestDispatcher("Receive11.jsp");
 	dispatcher.forward(request, response);
-
+	*/
+	
 %>
 
 <!-- <!DOCTYPE html>
