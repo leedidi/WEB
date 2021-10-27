@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EmmetTest02.html</title>
+</head>
+<body>
+
+
+<!-- 내가 작성한 코드: h1{Emmet#title.}+(h2{소제목}+p{내용})*5-->
+
+실습 1.
+
+ h1#title.blue{Emmet}+(h2.subtitle{소제목}+p.content{내용})*5
+<h1 id="title" class="blue">Emmet</h1>
+ <h2 class="subtitle">소제목</h2>
+ <p class="content">내용</p>
+ <h2 class="subtitle">소제목</h2>
+ <p class="content">내용</p>
+ <h2 class="subtitle">소제목</h2>
+ <p class="content">내용</p>
+ <h2 class="subtitle">소제목</h2>
+ <p class="content">내용</p>
+ <h2 class="subtitle">소제목</h2>
+ <p class="content">내용</p>
+
+<!--@ 하나씩 차근차근히,,, 처음부터 길게 하는게 안 된다면 조합해서 조금씩 하나하나 해도 됨! -->
+
+
+
+실습 2.
+<!-- 
+//@ 내가 작성한 코드
+
+tbl>tr*3>td*6
+<tbl>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+</tbl>
+
+tbl>tr.line*3>td*6 
+-->
+
+table>tr.line*3>((td.col{내용$})*3(td.comm{부연설명}))
+<table>
+	<tr class="line">
+		<td class="col">내용1</td>
+		<td class="comm">부연설명</td>
+		<td class="col">내용2</td>
+		<td class="comm">부연설명</td>
+		<td class="col">내용3</td>
+		<td class="comm">부연설명</td>
+	</tr>
+	<tr class="line">
+		<td class="col">내용1</td>
+		<td class="comm">부연설명</td>
+		<td class="col">내용2</td>
+		<td class="comm">부연설명</td>
+		<td class="col">내용3</td>
+		<td class="comm">부연설명</td>
+	</tr>
+	<tr class="line">
+		<td class="col">내용1</td>
+		<td class="comm">부연설명</td>
+		<td class="col">내용2</td>
+		<td class="comm">부연설명</td>
+		<td class="col">내용3</td>
+		<td class="comm">부연설명</td>
+	</tr>
+</table>
+
+
+실습 3.
+<!-- 
+table#tbl>tr.line$*2>th#head$ + (td.col{내용$})*3
+ -->
+
+table#tbl>tr#line$*2>(th#head${항목$}+(td.col{내용$})*3)
+<table id="tbl">
+	<tr id="line1">
+		<th id="head1">항목1</th>
+		<td class="col">내용1</td>
+		<td class="col">내용2</td>
+		<td class="col">내용3</td>
+	</tr>
+	<tr id="line2">
+		<th id="head2">항목2</th>
+		<td class="col">내용1</td>
+		<td class="col">내용2</td>
+		<td class="col">내용3</td>
+	</tr>
+</table>
+
+
+
+</body>
+</html>
