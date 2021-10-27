@@ -2,6 +2,7 @@ SELECT USER
 FROM DUAL;
 --==>> SCOTT
 
+
 --○ 기존 테이블 제거
 DROP TABLE TBL_SCORE PURGE;
 --==>> Table TBL_SCORE이(가) 삭제되었습니다.
@@ -77,25 +78,3 @@ INSERT INTO TBL_SCORE(SID, NAME, KOR, ENG, MAT) VALUES(SCORESEQ.NEXTVAL, '서승균
 
 COMMIT;
 --> 커밋 완료.
-
-
-TRUNCATE TABLE TBL_SCORE;
---==>> Table TBL_SCORE이(가) 잘렸습니다.
-
-
-DROP SEQUENCE SCORESEQ;
---==>> Sequence SCORESEQ이(가) 삭제되었습니다.
-
-
-CREATE SEQUENCE SCORESEQ
-NOCACHE;
---==>> Sequence SCORESEQ이(가) 생성되었습니다.
-
-COMMIT;
---> 커밋 완료.
-
-
-
-
-
-
