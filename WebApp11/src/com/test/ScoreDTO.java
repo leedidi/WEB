@@ -2,76 +2,67 @@ package com.test;
 
 public class ScoreDTO
 {
-	String sid, name, kor, eng, mat, tot, avg;
-
+	private String name, sid;
+	private int scoreKor, scoreEng, scoreMat;
+	private int scoreTot;
+	private double scoreAvg;
+	
+	public double getScoreAvg()
+	{
+		return scoreAvg;
+	}
+	public void setScoreAvg(double scoreAvg)
+	{
+		this.scoreAvg = scoreAvg;
+	}
 	public String getSid()
 	{
 		return sid;
 	}
-
 	public void setSid(String sid)
 	{
 		this.sid = sid;
 	}
-
 	public String getName()
 	{
 		return name;
 	}
-
 	public void setName(String name)
 	{
 		this.name = name;
 	}
-
-	public String getKor()
+	public int getScoreKor()
 	{
-		return kor;
+		return scoreKor;
+	}
+	public void setScoreKor(int scoreKor)
+	{
+		this.scoreKor = scoreKor;
+	}
+	public int getScoreEng()
+	{
+		return scoreEng;
+	}
+	public void setScoreEng(int scoreEng)
+	{
+		this.scoreEng = scoreEng;
+	}
+	public int getScoreMat()
+	{
+		return scoreMat;
+	}
+	public void setScoreMat(int scoreMat)
+	{
+		this.scoreMat = scoreMat;
+	}
+	public int getScoreTot()
+	{
+		return scoreTot;
+	}
+	public void setScoreTot(int scoreTot)
+	{
+		this.scoreTot = scoreTot;
 	}
 
-	public void setKor(String kor)
-	{
-		this.kor = kor;
-	}
-
-	public String getEng()
-	{
-		return eng;
-	}
-
-	public void setEng(String eng)
-	{
-		this.eng = eng;
-	}
-
-	public String getMat()
-	{
-		return mat;
-	}
-
-	public void setMat(String mat)
-	{
-		this.mat = mat;
-	}
-
-	public String getTot()
-	{
-		return tot;
-	}
-
-	public void setTot(String tot)
-	{
-		this.tot = tot;
-	}
-
-	public String getAvg()
-	{
-		return avg;
-	}
-
-	public void setAvg(String avg)
-	{
-		this.avg = avg;
-	}
 	
 }

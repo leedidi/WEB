@@ -1,38 +1,42 @@
 <%@page import="com.test.ScoreDTO"%>
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="com.test.ScoreDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
-	StringBuffer result = new StringBuffer();
-	String count = "<span id='memberCount'>전체 인원 수 : ";
+	// 5개 파일 만들기
+	// 오라클에서 null 존재... truncate 하고 새로 입력해서 만들기
+	// 에밋 가지고 해결해보기!
+	// 같이 해결 안 하고 팀원끼리 해 볼 것...
 	
+	StringBuffer str = new StringBuffer();
 	ScoreDAO dao = null;
+	
+	String scoreCount = "<span id='scoreCount'>전체 인원 수 : ";
+	
 	try
 	{
-		// 데이터베이스 연결
 		dao = new ScoreDAO();
 		
-		// 전체 인원 수 조회
-		count += dao.count()+"명</span>";
+		scoreCount += dao.count() + "명</span>";
 		
-		// 전체 DB 조회
-		result.append("<table border=1>");
-		result.append("<tr><th>번호</th><th>이름</th>"
-			+"<th>국어점수</th><th>영어점수</th><th>수학점수</th><th>총점</th><th>평균</th></tr>");
+		str.append("<table class='table'>");
+		str.append("<tr><th>번호</th><th>이름</th><th>국어점수</th><th>영어점수</th><th>수학점수</th>"
+				+"<th>합계</th><th>평균</th></tr>");
 		
-		for (ScoreDTO dto : dao.lists())
+		// dao 객체의lists() 호출
+		for(ScoreDTO score : dao.lists())
 		{
-			result.append("<tr>");
-			result.append("<td>"+dto.getSid()+"</td>");
-			result.append("<td>"+dto.getName()+"</td>");
-			result.append("<td>"+dto.getKor()+"</td>");
-			result.append("<td>"+dto.getEng()+"</td>");
-			result.append("<td>"+dto.getMat()+"</td>");
-			result.append("<td>"+dto.getTot()+"</td>");
-			result.append("<td>"+dto.getAvg()+"</td>");
-			result.append("</tr>");
+			str.append("<tr>");
+			str.append("<td class='record'>" + score.getSid() + "</td>");
+			str.append("<td class='record'>" + score.getName() + "</td>");
+			str.append("<td class='record'>" + score.getScoreKor() + "</td>");
+			str.append("<td class='record'>" + score.getScoreEng() + "</td>");
+			str.append("<td class='record'>" + score.getScoreMat() + "</td>");
+			str.append("<td class='record'>" + score.getScoreTot() + "</td>");
+			str.append("<td class='record'>" + String.format("%.2f",score.getScoreAvg()) + "</td>");
+			str.append("</tr>");			
 		}
-		result.append("</table>");
+		
+		str.append("</table>");
 		
 	}
 	catch(Exception e)
@@ -43,14 +47,13 @@
 	{
 		try
 		{
-			// 데이터베이스 연결 종료
 			dao.close();
 		}
 		catch(Exception e)
 		{
 			System.out.println(e.toString());
 		}
-	}
+	}	
 
 %>
 <!DOCTYPE html>
@@ -58,6 +61,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ScoreList.jsp</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
 <style type="text/css">
 	.errMsg {color: red; font-size: small; display: none;}
 	.table {display: table;}
@@ -66,12 +70,17 @@
 	.tdcontent {display: table-cell;}
 </style>
 <script type="text/javascript">
-	function check()
+
+	function formCheck()
 	{
-		var userName = document.getElementById("userName");
-		var userKor = document.getElementById("userKor");
-		var userEng = document.getElementById("userEng");
-		var userMat = document.getElementById("userMat");
+		//함수 확인
+		//alert("함수 호출 확인");
+		
+		// 빨간 글씨 관련 코드
+		var uName = document.getElementById("userName");
+		var uKor = document.getElementById("scoreKor");
+		var uEng = document.getElementById("scoreEng");
+		var uMat = document.getElementById("scoreMat");
 		
 		var nameMsg = document.getElementById("nameMsg");
 		var korMsg = document.getElementById("korMsg");
@@ -83,74 +92,134 @@
 		engMsg.style.display = "none";
 		matMsg.style.display = "none";
 		
-		if (userName.value=="")
+		if (uName.value=="")
 		{
 			nameMsg.style.display = "inline";
-			userName.focus();
+			uName.focus();
 			return false;
 		}
 		
-		if (userKor.value=="" || isNaN(userKor.value) || Number(userKor.value)<0 || Number(userKor.value)>100)
+		if (uKor.value=="" || isNaN(uKor.value) || Number(uKor.value)<0 || Number(uKor.value)>100)
 		{
 			korMsg.style.display = "inline";
-			userKor.focus();
+			uKor.focus();
 			return false;
 		}
 		
-		if (userEng.value=="" || isNaN(userEng.value) || Number(userEng.value)<0 || Number(userEng.value)>100)
+		if (uEng.value=="" || isNaN(uEng.value) || Number(uEng.value)<0 || Number(uEng.value)>100)
 		{
 			engMsg.style.display = "inline";
-			userEng.focus();
+			uEng.focus();
 			return false;
 		}
 		
-		if (userMat.value=="" || isNaN(userMat.value) || Number(userMat.value)<0 || Number(userMat.value)>100)
+		if (uMat.value=="" || isNaN(uMat.value) || Number(uMat.value)<0 || Number(uMat.value)>100)
 		{
 			matMsg.style.display = "inline";
-			userMat.focus();
+			uMat.focus();
 			return false;
 		}
 		
 		return true;
 	}
+
 </script>
 </head>
 <body>
-<div>
-	<h1>실습 - DAO, DTO 활용</h1>
-	<hr>
-</div>
 
 <div>
-	<form action="ScoreInsert.jsp" method="post" onsubmit="return check();">
-		<div class="table" id="input">
-			<div class="tr">
-				<div class="tdsub">이름(*)</div>
-				<div class="tdcontent"><input type="text" id="userName" name="userName" class="txt">
-										<span id="nameMsg" class="errMsg">이름을 입력해주세요</span></div>
-			</div>
-			<div class="tr">
-				<div class="tdsub">국어점수</div>
-				<div class="tdcontent"><input type="text" id="userKor" name="userKor" class="txt">
-										<span id="korMsg" class="errMsg">0~100 사이의 숫자를 입력해주세요</span></div>
-			</div>
-			<div class="tr">
-				<div class="tdsub">영어점수</div>
-				<div class="tdcontent"><input type="text" id="userEng" name="userEng" class="txt">
-										<span id="engMsg" class="errMsg">0~100 사이의 숫자를 입력해주세요</span></div>
-			</div>
-			<div class="tr">
-				<div class="tdsub">수학점수</div>
-				<div class="tdcontent"><input type="text" id="userMat" name="userMat" class="txt">
-										<span id="matMsg" class="errMsg">0~100 사이의 숫자를 입력해주세요</span></div>
-			</div>
-		</div>
-		<div><button type="submit" class="btn">제출하기</button></div>
+	<h1>성적 입력 실습</h1>
+</div>
+
+
+
+<!-- <div>
+	<p>성적 입력</p>
+	<form action= "MemberInsert.jsp" method="post" onsubmit="return formCheck()">
+	<form action= "ScoreInsert_1.jsp" method="post" onsubmit="return formCheck()">
+		<table class="table">
+			<tr>
+				<th>이름(*)</th>
+				<td>
+					<input type="text" id="userName" name="userName" class="txt">
+					<span class="errMsg" id="nameMsg">이름을 입력해야 합니다.</span>
+				</td>
+			</tr>
+			<tr>
+				<th>국어점수</th>
+				<td>
+					<input type="text" id="scoreKor" name="scoreKor" class="txt">
+				</td>
+			</tr>
+			<tr>
+				<th>영어점수</th>
+				<td>
+					<input type="text" id="scoreEng" name="scoreEng" class="txt">
+				</td>
+			</tr>
+			<tr>
+				<th>수학점수</th>
+				<td>
+					<input type="text" id="scoreMat" name="scoreMat" class="txt">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: left;">
+					<input type="submit" value="성척 추가" class="btn">
+			</tr>
+		</table>
 	</form>
 </div>
+ -->
+ 
+ <div>
+	<p>성적입력
+		<form action="ScoreInsert.jsp" method="post" onsubmit="return formCheck()">			
+		<table class="table">
+				<tr>
+					<th>이름(*)</th>
+					<td>
+						<input type="text" id="userName" name="userName" class="txt" >
+						<span class="errMsg" id="nameMsg">이름을 입력해야 합니다.</span>
+					</td>
+				</tr>
+				<tr>
+					<th>국어점수</th>
+					<td>
+						<input type="text" id="scoreKor" name="scoreKor" class="txt" >
+						<span class="errMsg" id="korMsg">0 ~ 100 사이의 점수를 입력</span>
+					</td>
+				</tr>
+				<tr>
+					<th>영어점수</th>
+					<td>
+						<input type="text" id="scoreEng" name="scoreEng" class="txt" >
+						<span class="errMsg" id="engMsg">0 ~ 100 사이의 점수를 입력</span>
+					</td>
+				</tr>
+				<tr>
+					<th>수학점수</th>
+					<td>
+						<input type="text" id="scoreMat" name="scoreMat" class="txt" >
+						<span class="errMsg" id="matMsg">0 ~ 100 사이의 점수를 입력</span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center;">
+						<input type="submit" value="성적추가" class="btn"
+							style="width: 200px; height=50px; font-style: bold;">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</p>
+</div>
 
-<div><%=count %></div>
-<div><%=result %></div>
+<div>
+	<p>성적 정보 리스트</p>
+	<%=scoreCount %>
+	<%=str.toString() %>
+</div>
 
 </body>
 </html>
