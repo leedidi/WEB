@@ -65,7 +65,21 @@
 	         str.append("<td>");
 	         str.append("<a href='MemberUpdateForm.jsp?sid=" + member.getSid() + "'>");
 	         str.append("<button type='button' class='btn01'>수정</button></a>");
-	         str.append("<a><button type='button' class='btn01'>삭제</button></a>");
+	         
+	         // memberDelete(1, '김소연')
+	         
+	         // ※ 따옴표의 종류 : ①"" ②'' ③\"\"
+	         //    일반적으로 따옴표가 두 번 중첩되어 사용하게 되면
+	         //    ① 과 ② 를 사용하면 된다.
+	         //    하지만, 따옴표가 세 번 중첨되어 사용될 경우
+	         //    ① Escape 를 사용해야 한다.
+	         
+	         
+	         //str.append("<a href='javascript:memberDelete(" + member.getSid() + ", \"" + member.getName() + "\")'>");
+	         //str.append("<a><button type='button' class='btn01'>삭제</button></a>");
+	         str.append("<a href='javascript:memberDelete("+member.getSid()+", \"" +member.getName()+"\")'>");
+            str.append("<button type='button' class='btn01'>삭제</button></a>");
+	         
 	         str.append("</td>");
 	         str.append("</tr>");
 	      }
@@ -86,6 +100,28 @@
 <meta charset="UTF-8">
 <title>MemberSelect.jsp</title>
 <link rel="stylesheet" type="text/css" href="css/MemberScore.css">
+<script type="text/javascript">
+
+	function memberDelete(sid, name)
+	{
+		// 확인
+		//alert("함수 호출 확인");
+		
+		// 확인
+		//alert("번호:" + sid + ", 이름:" + name);
+		
+		var res = confirm("번호:" + sid + ", 이름:" + name + "\n이 회원의 정보를 삭제하시겠습니까?");
+		
+		// 확인
+		//alert(res);
+		//-- confirm 창은 true(확인) 또는 false(취소)를 반환
+		
+		if(res)
+			window.location.href="MemberDelete.jsp?sid=" + sid;
+	}
+
+
+</script>
 </head>
 <body>
 

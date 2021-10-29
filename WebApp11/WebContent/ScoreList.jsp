@@ -22,7 +22,7 @@
 		str.append("<tr><th>번호</th><th>이름</th><th>국어점수</th><th>영어점수</th><th>수학점수</th>"
 				+"<th>합계</th><th>평균</th></tr>");
 		
-		// dao 객체의lists() 호출
+		// dao 객체의 lists() 호출
 		for(ScoreDTO score : dao.lists())
 		{
 			str.append("<tr>");
