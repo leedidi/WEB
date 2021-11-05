@@ -75,7 +75,7 @@
 	<div id="bbsList_header">
 	
 		<div id="leftHeader">
-			<form action="" name="searchFrom" method="post">
+			<form action="" name="searchForm" method="post">
 				<select name="searchkey" class="selectFiled">
 					<option value="subject">제목</option>
 					<option value="name">작성자</option>
@@ -96,7 +96,7 @@
 	
 	<!--@@ 여기먼가를 안쓴거같은뎅,,,,,여기,,,보충하기! -> 보충 완료  -->
 	<div id="bbsList_list">
-	
+		
 		<div id="title">
 			<dl>
 				<dt class="num">번호</dt>
@@ -109,6 +109,7 @@
 		
 		<div id="lists">
 			<!-- 
+			유동언니 안녕 언니는 최강짱짱맨이야 ㅎㅎㅎ
 			<dl>
 				<dd class="num">1</dd>
 				<dd class="subject">안녕하세요</dd>
@@ -121,12 +122,23 @@
 			 for (BoardDTO dto : lists)
 			 {
 			 %>
-			 <dl>
+			 <%-- <dl>
 				<dd class="num"><%=dto.getNum() %></dd>
 				<dd class="subject"><%=dto.getSubject() %></dd>
 				<dd class="num"><%=dto.getName() %></dd>
 				<dd class="num"><%=dto.getCreated() %></dd>
 				<dd class="num"><%=dto.getHitCount() %></dd>
+			</dl> --%>
+			<dl>
+				<dd class="num"><%=dto.getNum() %></dd>
+				
+				<dd class="subject">
+					<a href="<%=articleUrl%>&num=<%=dto.getNum()%>"><%=dto.getSubject() %></a>
+				</dd>
+				
+				<dd class="name"><%=dto.getName() %></dd>
+				<dd class="created"><%=dto.getCreated() %></dd>
+				<dd class="hitCount"><%=dto.getHitCount() %></dd>
 			</dl>
 			 <%
 			 }

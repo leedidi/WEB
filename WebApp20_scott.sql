@@ -207,3 +207,67 @@ SELECT NVL(MAX(NUM), -1) AS BEFORENUM FROM TBL_BOARD WHERE NUM<9
 ; 
 
 
+--------------------------------------------------------------------------------
+--■■■ 실습 진행간 테스트 ■■■--
+
+--○ 게시물 작성 쿼리문 구성
+INSERT INTO TBL_BOARD(NUM, NAME, PWD, EMAIL, SUBJECT, CONTENT, IPADDR, HITCOUNT, CREATED)
+VALUES(1, '정미화', '1234', 'hwa@test.com', '작성테스트', '내용물작성', '211.238.142.153', 0, SYSDATE);
+--==>> 1 행 이(가) 삽입되었습니다.
+
+--○ 커밋
+COMMIT;
+--==>> 커밋 완료.
+
+ROLLBACK;
+--==>> 롤백 완료.
+
+--○ 게시물 작성
+INSERT INTO TBL_BOARD(NUM, NAME, PWD, EMAIL, SUBJECT, CONTENT, IPADDR, HITCOUNT, CREATED)
+VALUES(2, '서승균', '1234', 'ssk@test.com', '승균이 출동', '내가 바로 그 승균이다', '211.238.142.159', 0, SYSDATE);
+--==>> 1 행 이(가) 삽입되었습니다.
+
+INSERT INTO TBL_BOARD(NUM, NAME, PWD, EMAIL, SUBJECT, CONTENT, IPADDR, HITCOUNT, CREATED)
+VALUES(3, '손다정', '1234', 'sdj@test.com', '손다정 출동', '서울 거처 마련', '211.238.142.161', 0, SYSDATE);
+--==>> 1 행 이(가) 삽입되었습니다.
+
+----○ 커밋
+COMMIT;
+--==>> 커밋 완료.
+
+
+
+SELECT *
+FROM TBL_BOARD;
+--==>>
+/*
+                    :
+154	박혜진154	java009$	apple154@test.com	최선을 다해 작성한 게시물 154	소모임 관련 내용물 작성	211.238.142.151	27	2011-04-10
+155	김혜진155	java006$	morning155@test.com	열심히 작성한 게시물 155	달리기 관련 내용물 작성	211.238.142.164	72	2011-04-11
+156	이혜진156	java004$	apple156@test.com	성실히 작성한 게시물 156	캠핑 관련 내용물 작성	211.238.142.154	27	2011-04-12
+157	최혜진157	java002$	morning157@test.com	재미있게 작성한 게시물 157	렌터카 관련 내용물 작성	211.238.142.167	72	2011-04-13
+158	최혜진158	java002$	apple158@test.com	재미있게 작성한 게시물 158	렌터카 관련 내용물 작성	211.238.142.167	27	2011-04-14
+159	이혜진159	java004$	test159@test.com	성실히 작성한 게시물 159	캠핑 관련 내용물 작성	211.238.142.154	32	2011-04-15
+160	김혜진160	java006$	apple160@test.com	열심히 작성한 게시물 160	달리기 관련 내용물 작성	211.238.142.164	27	2011-04-16
+161	박혜진161	java009$	morning161@test.com	최선을 다해 작성한 게시물 161	소모임 관련 내용물 작성	211.238.142.151	72	2011-04-17
+                    :
+*/
+
+
+----○ 커밋
+COMMIT;
+--==>> 커밋 완료.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
