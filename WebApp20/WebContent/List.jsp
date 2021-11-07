@@ -110,7 +110,7 @@
 		<div id="lists">
 			<!-- 
 			유동언니 안녕 언니는 최강짱짱맨이야 ㅎㅎㅎ
-			<dl>
+			<dl> 
 				<dd class="num">1</dd>
 				<dd class="subject">안녕하세요</dd>
 				<dd class="num">김진희</dd>
@@ -122,12 +122,13 @@
 			 for (BoardDTO dto : lists)
 			 {
 			 %>
-			 <%-- <dl>
+			 <%-- <dl> @ num을 각각의 num, subject, name, created, hitcount 로 바꿔줬어야 함! 
+			             이거 안해서 간격 안맞았던 거.
 				<dd class="num"><%=dto.getNum() %></dd>
 				<dd class="subject"><%=dto.getSubject() %></dd>
-				<dd class="num"><%=dto.getName() %></dd>
-				<dd class="num"><%=dto.getCreated() %></dd>
-				<dd class="num"><%=dto.getHitCount() %></dd>
+				<dd class="name"><%=dto.getName() %></dd>
+				<dd class="created"><%=dto.getCreated() %></dd>
+				<dd class="hitcount"><%=dto.getHitCount() %></dd>
 			</dl> --%>
 			<dl>
 				<dd class="num"><%=dto.getNum() %></dd>
