@@ -419,6 +419,7 @@ public class BoardDAO
    }
    
    // 게시물 번호의 최대값 얻어내기
+   /*
    public int getMaxNum()
    {
       int result = 0;
@@ -447,6 +448,22 @@ public class BoardDAO
       return result; 
       
    }// end getMaxNum()
+   */
+   public int getMaxNum() throws SQLException
+   {
+      int result = 0;
+      
+      String sql = "SELECT NVL(MAX(NUM), 0) AS MAXNUM FROM TBL_BOARD";
+      PreparedStatement pstmt = conn.prepareStatement(sql);
+      ResultSet rs = pstmt.executeQuery();
+      if(rs.next())
+         result = rs.getInt("MAXNUM");
+      
+      rs.close();
+      pstmt.close();
+      
+      return result;
+   }
    
    // 게시물 작성 → 데이터 입력
    public int insertData(BoardDTO dto)

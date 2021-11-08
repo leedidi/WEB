@@ -108,11 +108,19 @@ public class MyUtil
 		//   이와 같은 상황이라면... 다시 10을 빼서 10으로 만들어주기 위한 구문.
 		
 		
+		/*
+		 * // 1 페이지 if ( (totalPage>numPerBlock) && (currentPageSetup>0) ) {
+		 * strList.append(" <a href='" + listUrl + "pageNum=1'></a>"); }
+		 *  -> 1 안나옴 어딘가의 오타였을 듯
+		 */
+		
 		// 1 페이지
-		if ( (totalPage>numPerBlock) && (currentPageSetup>0) )
-		{
-			strList.append(" <a href='" + listUrl + "pageNum=1'></a>");
-		}
+	      if( (totalPage>numPerBlock) && (currentPageSetup>0) )
+	      {
+	         strList.append(" <a href='" + listUrl + "pageNum=1'>1</a>");
+	         //▶         - : 숫자 페이지 사이 공백을 위한 띄어쓰기
+	      }
+		
 		//@ 숫자 사이사이에 공백 넣기 위해  <a href 이렇게.. <a 앞에 한칸 띄어쓰기 넣음
 		//-- listUrl 은 위에서 (라인 91) 이미 전처리가 끝난 상황이기 때문에
 		//   『...?』 상태 또는 『...?...&』 인 상태이다.

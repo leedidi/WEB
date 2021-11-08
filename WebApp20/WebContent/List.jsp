@@ -15,9 +15,17 @@
 	BoardDAO dao = new BoardDAO(conn);
 	MyUtil myUtil = new MyUtil();
 	
+	
+	// 넘어온(요청된) 페이지 번호 확인
+	String pageNum = request.getParameter("pageNum");
+	
 	// 현재 표시되어야 하는 페이지
 	int currentPage = 1;
 
+	if(pageNum != null)
+		currentPage = Integer.parseInt(pageNum);
+	//@ 페이지 클릭시 바뀌는 코드!
+	
 	// 전체 데이터 갯수 구하기
 	int dataCount = dao.getDataCount();
 	
@@ -87,7 +95,8 @@
 		</div><!-- close #leftHeader -->
 		
 		<div id="rightHeader">
-			<input type="button" value="글올리기" class="btn2">
+			<input type="button" value="글올리기" class="btn2"
+			onclick="javascript:location.href='<%=cp %>/Created.jsp'">
 		</div><!-- close #rightHeader -->
 		
 	</div><!-- close #bbsList_header -->
@@ -150,6 +159,7 @@
 		<div id="footer">
 			<!-- <p>1 Prev 21 22 23 24 25 26 27 28 29 30 Next 55</p> -->
 			<!-- <p>등록된 게시물이 존재하지 않습니다.</p> -->
+			<!--@ Prev 이전에 1이 안보이는거같은뎅 왜지...? -> 확인해보기 -->
 			<p>
 			<%
 			if(dataCount != 0)

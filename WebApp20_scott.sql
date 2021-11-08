@@ -259,7 +259,10 @@ COMMIT;
 --==>> Ä¿¹Ô ¿Ï·á.
 
 
-
+SELECT PWD
+FROM TBL_BOARD
+WHERE NUM=633;
+--==>> java004$
 
 
 
