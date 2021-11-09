@@ -7,7 +7,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-<!-- //@ 넘어온 값으로 DTO 구성... 이걸 몽땅, dto로! 바꾼 속성 이름 없기 때무에 그대로.-->
+<!-- //@ 넘어온 값으로 DTO 구성... 이걸 몽땅, dto로! 바꾼 속성 이름 없기 때문에 그대로.-->
 <jsp:useBean id="dto" class="com.test.BoardDTO"></jsp:useBean>
 <jsp:setProperty property="*" name="dto"/>
 <%

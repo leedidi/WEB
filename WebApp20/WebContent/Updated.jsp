@@ -14,6 +14,11 @@
 	// 추가
 	String pageNum = request.getParameter("pageNum");
 
+	// 삭제 액션 요청 처리 과정에서 추가
+	String statusStr = request.getParameter("status");
+	int status = Integer.parseInt(statusStr);
+	
+		
 	Connection conn = DBConn.getConnection();
 	BoardDAO dao = new BoardDAO(conn);
 	
@@ -114,6 +119,40 @@
 		f.submit();
 	}
 	
+	function removeIt()
+	{
+		f = document.myForm;
+		
+		// check~!!!
+		// 패스워드 입력 확인 ---------------------------------
+		
+		str = f.pwd.value;
+		str = str.trim();
+		
+		if(!str)
+		{
+			alert("\n패스워드를 입력하세요~!!!");
+			f.pwd.focus();
+			return;
+			//@ retrun: 함수를 종료한다는 의미
+		}
+		
+		var pwdSource = f.pwdSource.value;
+		if(str != pwdSource)
+		{
+			alert("\n패스워드가 맞지 않습니다~!!!");
+			f.pwd.focus();
+			return;
+		}
+		
+		// 패스워드 입력 확인 ---------------------------------
+		
+		f.action = "<%=cp%>/Delete_ok.jsp";
+		
+		f.submit();
+	}
+	
+	
 </script>
 
 </head>
@@ -207,9 +246,25 @@
          <div class="bbsCreated_bottomLine">
             <dl>
                <dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
-               <dd><input type="text" name="subject" size="74" 
+               <dd>
+               <% 
+               if(status==1)
+               {
+               %>
+               <input type="text" name="subject" size="74" 
                maxlength="100" class="boxTF"
                value="<%=dto.getSubject()%>">
+               <%
+               }
+               else
+               {
+               %>
+            	<input type="text" name="subject" size="74" 
+                maxlength="100" class="boxTF"
+                value="<%=dto.getSubject()%>" disabled="disabled">   
+               <%
+               }
+               %>
                </dd>
             </dl>
          </div><!-- close .bbsCreated_bottomLine -->
@@ -217,9 +272,25 @@
          <div class="bbsCreated_bottomLine">
             <dl>
                <dt>작 성 자</dt>
-               <dd><input type="text" name="name" size="35"
+               <dd>
+                <% 
+               if(status==1)
+               {
+               %>
+               <input type="text" name="name" size="35"
                 maxlength="20" class="boxTF"
                 value="<%=dto.getName() %>">
+                <%
+               }
+               else
+               {
+               %>
+                <input type="text" name="name" size="35"
+                maxlength="20" class="boxTF"
+                value="<%=dto.getName() %>" disabled="disabled">
+                <%
+               }
+               %>
                 </dd>
             </dl>
          </div><!-- close .bbsCreated_bottomLine -->
@@ -227,17 +298,50 @@
          <div class="bbsCreated_bottomLine">
             <dl>
                <dt>이 메 일</dt>
-               <dd><input type="email" name="email" size="35" 
+               <dd>
+               <% 
+               if(status==1)
+               {
+               %>
+               <input type="email" name="email" size="35" 
                maxlength="50" class="boxTF"
-               value="<%=dto.getEmail()%>"></dd>
+               value="<%=dto.getEmail()%>">
+               <%
+               }
+               else
+               {
+               %>
+                <input type="email" name="email" size="35" 
+               maxlength="50" class="boxTF"
+               value="<%=dto.getEmail()%>" disabled="disabled">
+               <%
+               }
+               %>
+               </dd>
             </dl>
          </div><!-- close .bbsCreated_bottomLine -->
          
          <div id="bbsCreated_content">
             <dl>
                <dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
-               <dd><textarea rows="12" cols="63" name="content" 
-               class="boxTA"><%=dto.getContent() %></textarea></dd>
+               <dd>
+               <% 
+               if(status==1)
+               {
+               %>
+               <textarea rows="12" cols="63" name="content" 
+               class="boxTA"><%=dto.getContent() %></textarea>
+               <%
+               }
+               else
+               {
+               %>
+               <textarea rows="12" cols="63" name="content" 
+               class="boxTA" disabled="disabled"><%=dto.getContent() %></textarea>
+               <%
+               }
+               %>
+               </dd>
             </dl>
          </div><!-- close #bbsCreated_content -->
          
@@ -259,9 +363,29 @@
          	<input type="hidden" name="num" value="<%=dto.getNum()%>">
          	<input type="hidden" name="pageNum" value="<%=pageNum %>">
          	
-            <input type="button" value="수정하기" class="btn2" onclick="sendIt()">
-            <input type="reset" value="다시입력" class="btn2" onclick="">
-            <input type="button" value="작성취소" class="btn2" onclick="">
+         	<% 
+             if(status==1)
+             {
+             %>       	
+            <input type="button" value="수정하기" class="btn2" 
+            onclick="sendIt()">
+            <input type="reset" value="다시입력" class="btn2" 
+            onclick="document.myForm.subject.focus();">
+            <input type="button" value="수정취소" class="btn2" 
+            onclick="javascript:location.href='<%=cp%>/List.jsp?pageNum=<%=pageNum%>&num=<%=dto.getNum()%>'">
+            <%
+            }
+            else
+            {
+            %>
+            <input type="button" value="삭제하기" class="btn2" 
+            onclick="removeIt()">
+            <input type="button" value="삭제취소" class="btn2" 
+            onclick="javascript:location.href='<%=cp%>/List.jsp?pageNum=<%=pageNum%>&num=<%=dto.getNum()%>'">
+            <%
+            } 
+            %>
+            
          </div><!-- close #bbsCreated_footer -->
          
       </div><!-- close #bbsCreated -->

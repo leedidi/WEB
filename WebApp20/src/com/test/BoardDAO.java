@@ -401,11 +401,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 public class BoardDAO
 {
@@ -503,6 +500,7 @@ public class BoardDAO
    // → 검색 기능을 작업하게 되면 수정하게 될 메소드
    // ▶일반적인 게시판일 경우 이렇게 정의되지만, 검색기능이 들어갈 경우
    // 검색결과에 해당하는 게시글은 줄어드니까 전체 페이징처리가 다르게 된다.   
+   /*
    public int getDataCount()
    {
       int result = 0;
@@ -531,11 +529,62 @@ public class BoardDAO
       
       return result;
    }
+   */
+   
+   //                        제목, 작성자, 내용
+   public int getDataCount(String searchKey, String searchValue)
+   {
+	   int result = 0;
+	   
+	   PreparedStatement pstmt = null;
+	   ResultSet rs = null;
+	   String sql = "";
+	   
+	   try
+	   {
+		   /*
+		   sql = "";
+		   
+		   //pstmt.setInt(1, dto.getNum());
+		   pstmt = conn.prepareStatement(sql);
+		   
+		   result = pstmt.executeUpdate();
+	         
+	      pstmt.close();
+	      */
+		   
+		   // check~!!!
+		   searchValue = "%" + searchValue + "%";
+		   
+		   sql = "SELECT COUNT(*) AS COUNT"
+		   		+ " FROM TBL_BOARD"
+		   		+ " WHERE " + searchKey + " LIKE ?";
+		   
+		   pstmt = conn.prepareStatement(sql);
+		   pstmt.setString(1, searchValue);
+		   
+		   rs = pstmt.executeQuery();
+		   if(rs.next())
+			   result = rs.getInt("COUNT");
+		   rs.close();
+		   pstmt.close();
+		   
+		   
+	   } catch (Exception e)
+	   {
+		   System.out.println(e.toString());
+	   }
+	   
+	   return result;
+   }
+   
+   
    
    // 특정 영역(시작번호 ~ 끝번호) 게시글의 목록을
    // 읽어오는 메소드 정의 
    // ▶ 페이징 처리에서 페이지에 해당하는 게시물 목록 구성
    // → 검색 기능을 작업하게 되면 수정하게 될 메소드
+   /*
    public List<BoardDTO> getLists(int start, int end)
    {
       List<BoardDTO> result = new ArrayList<BoardDTO>();
@@ -579,6 +628,141 @@ public class BoardDAO
       
       return result;
    }// end getLists(int start, int end)
+   */
+   
+   /*
+   public List<BoardDTO> getLists(int start, int end, String searchKey, String searchValue)
+   {
+	  List<BoardDTO> result = new ArrayList<BoardDTO>();
+	      
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      String sql = "";
+      
+      try
+      {
+    	  //
+    	  searchValue = "%" + searchValue + "%";
+    	  */
+    	  /*
+    	  sql = "SELECT NUM, NAME, SUBJECT, HITCOUNT, TO_CHAR(CREATED, 'YYYY-MM-DD')"
+    	  		+ " AS CREATED FROM TBL_BOARD WHERE NUM >= ? AND NUM <= ?"
+    	  		+ " AND" + searchKey + " LIKE '%?%' ORDER BY NUM DESC";
+    	  */
+    	  /*
+    	  pstmt = conn.prepareStatement(sql);
+    	  pstmt.setInt(1, start);
+    	  pstmt.setInt(2, end);
+    	  pstmt.setString(3, searchValue);
+    	  
+    	  rs = pstmt.executeQuery();
+    	  while(rs.next())
+    	  {
+    		  BoardDTO dto = new BoardDTO();
+    		  dto.setName(rs.getString(1));
+    		  dto.setSubject(rs.getS);
+    	  }
+    	  */
+    	  /*
+			sql = "SELECT NUM, NAME, SUBJECT, HITCOUNT, CREATED";
+			sql = " FROM";//@ 대신 여기 공백 신경 써줘야 함!
+			sql = "(";
+			sql = "    SELECT ROWNUM RNUM, DATA.*";
+			sql = "    FROM";
+			sql = "    (";
+			sql = "        SELECT NUM, NAME, SUBJECT, HITCOUNT, TO_CHAR(CREATED, 'YYYY-MM-DD') AS CREATED";
+			sql = "        FROM TBL_BOARD";
+			sql = "        WHERE " + searchKey + "LIKE ?"; // 추가 구문
+			sql = "        ORDER BY NUM DESC";
+			sql = "    ) DATA";
+			sql = ")";
+			sql = " WHERE RNUM >=? AND RNUM <= ?;";//@ 대신 여기 공백 신경 써줘야 함!
+    	  
+    	  
+			
+			
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, searchValue);
+	         pstmt.setInt(2, start);
+	         pstmt.setInt(3, end);
+	         
+	         rs = pstmt.executeQuery();
+	         while(rs.next())
+	         {
+	            BoardDTO dto = new BoardDTO();
+	            dto.setNum(rs.getInt(1));
+	            dto.setName(rs.getString(2));
+	            dto.setSubject(rs.getString(3));
+	            dto.setHitCount(rs.getInt(4));
+	            dto.setCreated(rs.getString(5));
+
+	            result.add(dto);
+	         }
+	         
+	         rs.close();
+	         pstmt.close();
+    		  
+      } catch (Exception e)
+      {
+    	  System.out.println(e.toString());
+      }
+      
+      return result;
+      
+	   
+   }
+   */
+   
+   public List<BoardDTO> getLists(int start, int end, String searchKey, String searchValue)
+   {
+      List<BoardDTO> result = new ArrayList<BoardDTO>();
+         
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      String sql = "";   
+         
+      try
+      {
+         searchValue = "%" + searchValue + "%";
+         
+         sql = "SELECT NUM, NAME, SUBJECT, HITCOUNT, CREATED"
+                  + " FROM ( SELECT ROWNUM RNUM, DATA.*"
+                  + " FROM ( SELECT NUM, NAME, SUBJECT, HITCOUNT, TO_CHAR(CREATED, 'YYYY-MM-DD') AS CREATED"
+                  + " FROM TBL_BOARD"
+                  + " WHERE " + searchKey +" LIKE ? "
+                  + " ORDER BY NUM DESC ) DATA )"
+                  + " WHERE RNUM >= ? AND RNUM <= ?";
+         
+         pstmt = conn.prepareStatement(sql);
+         pstmt.setString(1, searchValue);
+         pstmt.setInt(2, start);
+         pstmt.setInt(3, end);
+         
+         rs = pstmt.executeQuery();
+         while(rs.next())
+         {
+        	 BoardDTO dto = new BoardDTO();
+              dto.setNum(rs.getInt(1));
+              dto.setName(rs.getString(2));
+              dto.setSubject(rs.getString(3));
+              dto.setHitCount(rs.getInt(4));
+              dto.setCreated(rs.getString(5));
+
+              result.add(dto);
+         }
+         
+         rs.close();
+         pstmt.close();
+      }
+      catch(Exception e)
+      {
+         System.out.println(e.toString());
+      }
+      
+      return result;
+   }
+   
+   
    
    // 특정 게시물 조회에 따른 조회 횟수 증가 메소드 정의
    public int updateHitCount(int num)

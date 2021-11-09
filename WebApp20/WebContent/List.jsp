@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@page import="com.test.BoardDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.util.MyUtil"%>
@@ -9,11 +10,19 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+
 <%
+
+	String strNum = request.getParameter("num");
+	int num = 0;
 	
+	if(strNum != null)
+		num = Integer.parseInt(strNum);
+
 	Connection conn = DBConn.getConnection();
 	BoardDAO dao = new BoardDAO(conn);
 	MyUtil myUtil = new MyUtil();
+
 	
 	
 	// 넘어온(요청된) 페이지 번호 확인
@@ -25,13 +34,68 @@
 	if(pageNum != null)
 		currentPage = Integer.parseInt(pageNum);
 	//@ 페이지 클릭시 바뀌는 코드!
+
+	// 검색 키와 검색 값 수신
+	String searchKey = request.getParameter("searchKey");
+	String searchValue = request.getParameter("searchValue");
+
+
+	if (searchKey != null)   //-- 검색 기능을 통해 페이지가 요청되었을 경우
+	{
+	
+	    // 넘어온 값이 GET 방식이라면...
+	    // -> GET 은 한글 문자열을 인코딩해서 보내기 때문에...
+	    if (request.getMethod().equalsIgnoreCase("GET"))
+	    {
+	       // 디코딩 처리
+	       searchValue = URLDecoder.decode(searchValue, "UTF-8");
+	    }
+	    
+	    // 검색 subject가 검색한 걸로 유지되게?
+	       
+	 }
+	 else            //-- 기본적인 페이지 요청이 이루어졌을 경우
+	 {
+	    searchKey = "subject";
+	    searchValue = "";
+	 }
+		
+	/*
+	if (searchKey != null) //-- 검색 기능을 통해 페이지가 요청되었을 경우
+	{
+		//@ 주소값의 페이지 한글일 때도 안 깨지게 하기 위해서...
+		// 넘어온 값이 GET 방식이라면 ...
+		//@  get, post 방식.. 받아옴 / uppercase, lowercase처럼 문자열 통일해 맞춤
+		//@ ------------------- ----------------------
+		if (request.getMethod().equalsIgnoreCase("GET"))
+		{
+			// 디코딩 처리
+			//@ 넘어온 value가 디코딩 처리되어서 searchValue 에 담김
+			searchValue = URLDecoder.decode(searchValue, "UTF-8");
+		}
+	}
+	else		//-- 기본적인 페이지 요청이 이루어졌을 경우
+	{
+		searchKey = "subject";
+		searchValue = "";
+	}
+	*/
 	
 	// 전체 데이터 갯수 구하기
-	int dataCount = dao.getDataCount();
+	int dataCount = dao.getDataCount(searchKey, searchValue);
+	
 	
 	// 전체 페이지를 기준으로 총 페이지 수 계산
 	int numPerPage = 10;	//-- 한 페이지에 표시할 데이터 갯수
 	int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+	
+	
+	// 전체 페이지 수 보다 표시할 페이지가 큰 경우
+	// 표시할 페이지를 전체 페이지로 처리
+	// → 한 마디로, 데이터를 삭제해서 페이지가 줄어들었을 경우
+	if (currentPage > totalPage)
+		currentPage = totalPage;
+	
 	
 	// 데이터베이스에서 가져올 시작과 끝 위치
 	int start = (currentPage-1) * numPerPage + 1;
@@ -39,10 +103,19 @@
 	
 	
 	// 실제 리스트 가져오기
-	List<BoardDTO> lists = dao.getLists(start, end);
+	List<BoardDTO> lists = dao.getLists(start, end, searchKey, searchValue);
 	
 	// 페이징 처리
 	String param = "";
+	
+	// 검색 값이 존재한다면...
+	if (!searchValue.equals(""))
+	{
+		param += "?searchKey=" + searchKey;
+		param += "&searchValue=" + searchValue;
+	}
+	
+	
 	String listUrl = "List.jsp" + param;
 	String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 	
@@ -62,6 +135,9 @@
 	//@ conn.close 하면 안 됨!	
 	
 %>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,10 +145,31 @@
 <title>List.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/style.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/list.css">
+
+<script type="text/javascript">
+
+	function sendIt()
+	{
+		var f = document.searchForm;
+		
+		// 검색 키워드에 대한 유효성 검사 코드 활용 가능~!!!
+		
+		// check~!!!
+		f.action = "<%=cp %>/List.jsp";
+		f.submit();
+		
+	}
+
+
+</script>
+
+
+
 </head>
 <body>
 
 <%-- <%=cp %> --%>
+
 
 <div id='bbsList'>
 
@@ -83,14 +180,45 @@
 	<div id="bbsList_header">
 	
 		<div id="leftHeader">
+			<!-- check~!!! → form 구성 -->
 			<form action="" name="searchForm" method="post">
-				<select name="searchkey" class="selectFiled">
+				<!-- <select name="searchKey" class="selectFiled">
 					<option value="subject">제목</option>
 					<option value="name">작성자</option>
 					<option value="content">내용</option>
+				</select> -->
+				<select name="searchKey" class="selectFiled">
+					<% /* if(searchKey == "subject")  */
+					    if(searchKey.equals("subject"))
+						{
+					%>
+						<option value="subject" selected="selected">제목</option>
+						<option value="name">작성자</option>
+						<option value="content">내용</option>
+					<%
+						}
+					    else if(searchKey.equals("name"))
+					    {
+					%>
+						<option value="subject">제목</option>
+						<option value="name" selected="selected">작성자</option>
+						<option value="content">내용</option>
+					<%
+					    }
+					    else if(searchKey.equals("content"))
+					    {
+					%>
+						<option value="subject">제목</option>
+						<option value="name">작성자</option>
+						<option value="content" selected="selected">내용</option>
+					<%
+					    }
+					%>
 				</select>
-				<input type="text" name="searchValue" class="textFiled">
-				<input type="button" value="검색" class="btn2">
+				
+				<input type="text" name="searchValue" class="textFiled" value="<%=searchValue %>">
+				<input type="button" value="검색" class="btn2"
+				onclick="sendIt()">
 			</form>
 		</div><!-- close #leftHeader -->
 		
@@ -118,7 +246,6 @@
 		
 		<div id="lists">
 			<!-- 
-			유동언니 안녕 언니는 최강짱짱맨이야 ㅎㅎㅎ
 			<dl> 
 				<dd class="num">1</dd>
 				<dd class="subject">안녕하세요</dd>

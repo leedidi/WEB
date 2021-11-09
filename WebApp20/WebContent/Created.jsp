@@ -210,8 +210,10 @@
          
          <div id="bbsCreated_footer">
             <input type="button" value="등록하기" class="btn2" onclick="sendIt()">
-            <input type="reset" value="다시입력" class="btn2" onclick="">
-            <input type="button" value="작성취소" class="btn2" onclick="">
+            <input type="reset" value="다시입력" class="btn2" 
+            onclick="document.myForm.subject.focus();">
+            <input type="button" value="작성취소" class="btn2" 
+            onclick="javascript:location.href='<%=cp%>/List.jsp'">
          </div><!-- close #bbsCreated_footer -->
          
       </div><!-- close #bbsCreated -->
