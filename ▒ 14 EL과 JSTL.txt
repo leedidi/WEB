@@ -1,0 +1,29 @@
+■■■ EL(Expression Language)과 JSTL(Jsp Standard Tag Library) ■■■
+
+○ EL(Expression Language : 표현 언어)
+
+   표현 언어는 JSTL 1.0 스펙에서 잠깐 소개되었다가
+   JSP 2.0 부터 공식적으로 포함되었으며
+   JSP 페이지에 사용되는 자바 코드를 대신해서
+   액션 태그 엘리먼트의 속성에 값을 지정하는 역할을 한다.
+
+   예를 들어
+   <someTags:aTag> 액션 태그 엘리먼트 속성은 attribute 이고
+   속성값은 <% pageContent.getAttribute("aName")%> 인 경우
+
+   <someTags:aTag attribute="<%=pageContent.getAttribute("aName")%>">
+   의 방식으로 표현해야 하지만
+
+   표현 언어에서는 다음과 같이 표현한다.
+   <someTags:aTag attribute="${aName}">
+
+   ==> - 표현 언어(EL)는 표현식(『<%= %>』)을 대신하는 효과를 갖는다.
+       - null 을 가지는 변수(데이터)에 대해 좀 더 관대한 특징을 갖는다.
+       - 데이터 형 변환을 자동으로 처리해준다.
+       - setAttribute() 로 넘긴 데이터를 getAttribute() 로 받는 대신
+         『${}』로 받는다. 
+  
+  
+
+
+○ JSTL(Jsp Standard Tag Library)
