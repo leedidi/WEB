@@ -133,14 +133,77 @@ http://localhost:8090/WebApp24/mvcbegin
 
 -------------------------------------------------------------------------------------------------
 
+○ NVC 관련 실습 2 (수정)
+
+- prg : WebApp25
+
+  ·web.xml		→ URL 매핑
+  ·MVCBegin.java       → Controller 역할(서블릿 클래스)
+  ·MVCBegin.jsp        → View 역할 (JSP 페이지)
+                           ----------------------
+                            경로 변경 ( WEB-INF/view/MVCBegin.jsp)
+
+- 사용자 최초 요청 주소
+http://localhost:8090/WebApp24/mvcsample01
+
+-------------------------------------------------------------------------------------------------
 
 
+○ NVC 관련 실습 3 (수정)
+
+- prg : WebApp25
+
+  ·web.xml			→ URL 매핑
+  ·MVCBegin.java       	→ Controller 역할(서블릿 클래스)
+  ·MVCBegin.jsp       		→ View 역할 (JSP 페이지)
+  ·MVCSample02Model.java       → View 역할 (JSP 페이지)
+
+- 사용자 최초 요청 주소
+http://localhost:8090/WebApp24/mvcsample02
 
 
+--------------------------------------------------------------------------------------------------
 
+○ 폼(form) 데이터 전송 및 수신 과정 비교
+    
+   ※ MVC 패턴 적용 이전 단계와 MVC 패턴 적용 이후 단계를
+      비교하여 이해할 수 있도록 한 것
 
+   - A
+    ·prj : WebApp26
 
+    ·HelloSend01.html
+    ·HelloReceive01.jsp
+ 
+    ·사용자 최초 요청 주소
+http://localhost:8090/WebApp26/HelloSend01.html
 
+   - B
+    ·prj : WebApp27
 
+    ·web.xml
+    ·HelloSend02.html
+    ·HelloReceive02.java
+//@ html 시작, 서블릿이 받아서 처리하게 해라
+ 
+    ·사용자 최초 요청 주소
+http://localhost:8090/WebApp27/HelloSend02.html → 서블릿주소
+
+ 
+   - C
+    ·prj : WebApp28
+
+    ·web.xml
+    ·HelloSend03.html
+    ·HelloSend03Controller.java
+    ·HelloReceive03Controller.java
+    ·HelloReceive03Model.java
+    ·HelloReceive03.jsp
+//@ MVC를 쓰게 하는 것. 파일 많아짐, 그럼에도 불구하고 이렇게 작업해라.
+ 
+    ·사용자 최초 요청 주소
+http://localhost:8090/WebApp28/hello
+
+ 
 
 
