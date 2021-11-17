@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JQTest08.html</title>
+<style type="text/css">
+	div.page
+	{
+		border: 1px solid gray;
+		padding: 3px;
+		margin: 2px;
+		position: absolute;
+		right: 10px;
+		top: 80px;
+	}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+	
+	$(document).ready(function()
+	{
+		$("button").css({"display":"block", "width":"200px"});
+		
+		$("button").click(function()
+		{
+			//$(".page").toggle("slow");
+			//$(this).next().toggle("slow"); //@ 그 다음 div 대해서만 토글 slow..!
+		
+			// 『$(선택자).next()』 : document 구조 상 다음 엘리먼트
+			
+			$(this).next().toggle(20, function()
+			{
+				alert("토글 기능 테스트 완료~!!!");
+			});
+			
+		})
+	});
+	
+</script>
+
+</head>
+<body>
+
+show()/hide()/toggle()<br>
+slideDown()/slideUp()/slideToggle()<br>
+fadeIn()/fadeOut()/fadeToggle()<br>
+<br><br>
+<!--@ 여닫고, 확장축소, 등등... 통틀어 토글이라고 함(대표적: pc의 전원 키. 한번 누르면 켜지고/꺼지고)  -->
+
+<button>Toggle(토글) 버튼</button>
+<div class="page">
+	<h1>jQuery Toggle</h1>
+	<p>
+		show()/hide()<br>
+		toggle()<br>
+		slideDown()/slideUp()<br>
+		slideToggle()<br>
+		fadeIn()/fadeOut()<br>
+		fadeToggle()<br>
+	</p>
+</div>
+
+<button>Toggle(토글) 버튼</button>
+<div class="page">
+	<h1>jQuery Toggle</h1>
+	<p>
+		show()/hide()<br>
+		toggle()<br>
+		slideDown()/slideUp()<br>
+		slideToggle()<br>
+		fadeIn()/fadeOut()<br>
+		fadeToggle()<br>
+	</p>
+</div>
+
+<button>Toggle(토글) 버튼</button>
+<div class="page">
+	<h1>jQuery Toggle</h1>
+	<p>
+		show()/hide()<br>
+		toggle()<br>
+		slideDown()/slideUp()<br>
+		slideToggle()<br>
+		fadeIn()/fadeOut()<br>
+		fadeToggle()<br>
+	</p>
+</div>
+
+<button>Toggle(토글) 버튼</button>
+<div class="page">
+	<h1>jQuery Toggle</h1>
+	<p>
+		show()/hide()<br>
+		toggle()<br>
+		slideDown()/slideUp()<br>
+		slideToggle()<br>
+		fadeIn()/fadeOut()<br>
+		fadeToggle()<br>
+	</p>
+</div>
+
+<button>Toggle(토글) 버튼</button>
+<div class="page">
+	<h1>jQuery Toggle</h1>
+	<p>
+		show()/hide()<br>
+		toggle()<br>
+		slideDown()/slideUp()<br>
+		slideToggle()<br>
+		fadeIn()/fadeOut()<br>
+		fadeToggle()<br>
+	</p>
+</div>
+
+</body>
+</html>
