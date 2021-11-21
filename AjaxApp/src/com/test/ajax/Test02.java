@@ -46,7 +46,7 @@ public class Test02 extends HttpServlet
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Test02OK.jsp");
 		//@ 에이젝스 뷰. 컨트롤러 수행내용을 에이젝스에게 전달.... 이쪽가보면 원하는 데이터 만들어놨으니 가져가!
 		//@ "Test02OK.jsp" 요게 뷰패이지.... Test02Ok: 에이젝스가 컨트롤한 뷰 페이지
-		//@ 냉장고앞에 붙여놓은 포스트잇.... "이거 꺼내 먹어!" 그게 뷰임!
+		//@ 냉장고 앞에 붙여놓은 포스트잇.... "이거 꺼내 먹어!" 그게 뷰임!
 		dispatcher.forward(request, response);
 		
 	}
