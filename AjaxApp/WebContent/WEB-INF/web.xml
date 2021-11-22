@@ -36,5 +36,30 @@
 		<url-pattern>/test02.do</url-pattern>
 	</servlet-mapping>
 	
+	<!--@ 나 test02req 관련이 없당...? 확인해보기 -> testreq는 선생님만 있는 상태임! 따로 안만들어도 ㅇㅋㅇㅋ  -->
+	<!-- AJAX 관련 실습 → 아이디 중복 검사 -->
+	<servlet>
+		<servlet-name>test03</servlet-name>
+		<servlet-class>com.test.ajax.Test03</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>test03</servlet-name>
+		<url-pattern>/test03.do</url-pattern>
+	</servlet-mapping>
+	
+	<!-- AJAX 관련 실습 → 우편번호 검색 -->
+	<servlet>
+		<servlet-name>test04</servlet-name>
+		<servlet-class>com.test.ajax.Test04</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>test04</servlet-name>
+		<url-pattern>/test04.do</url-pattern>
+	</servlet-mapping>
+	
+	
+	
 	
 </web-app>
