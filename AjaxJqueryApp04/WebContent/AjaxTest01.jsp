@@ -14,7 +14,6 @@
       $("#sendBtn").click(function()
       {
          //alert("확인");
-         
 		 
          // data 구성         
          var params = "name=" + $.trim($("#name").val())
