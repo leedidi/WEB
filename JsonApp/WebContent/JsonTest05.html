@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JsonTest05.html</title>
+<script type="text/javascript">
+
+	var myJsonObject5 =
+	{
+		"test" : function(args)
+		{
+			alert("Method Test : " + args);
+		}
+	}
+	
+	var t = myJsonObject5.test;
+	/* var t = myJsonObject5.test(args); */
+	
+	//@ 자바에선 콜바이벨류/콜바이레퍼런스... 값타입 값 끌어당겨서, 참조타입 데이터에서는 참조 끌어당겨서 사용
+	//@ sc.next... 이런건 다 레퍼런스.
+	
+	// var 로봇;
+	// var 장난감;
+
+</script>
+</head>
+<body>
+
+<form>
+	
+	<input type="button" value="click1" onclick="t('bumsuk')">
+	<!-- → Method Test : bumsuk -->
+	
+	<input type="button" value="click2"
+		   onclick="eval('var a=' + myJsonObject5.test); a('bumsuk')">
+	<!-- → Method Test : bumsuk -->
+	
+   <input type="button" value="click3" class="btn" 
+  		  onclick="eval('(' + myJsonObject5.test + ')(\'bumsuk\')')">
+   
+   <!-- Method Test : bumsuk -->
+			
+</form>
+
+
+</body>
+</html>
